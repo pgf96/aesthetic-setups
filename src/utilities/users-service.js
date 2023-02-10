@@ -1,7 +1,7 @@
 import * as usersAPI from './users-api'
 
 export async function signUp(userData) {
-    // Delegate the network request code to the users-api.js API module
+    //network request code to the users-api.js API module
     const token = await usersAPI.signUp(userData);
     localStorage.setItem('token', token);
     return getUser();

@@ -33,8 +33,7 @@ async function login(req,res) {
   }
 }
 
-async function checkToken(req,res) {
-  // console.log('req.user', req.user)
+function checkToken(req,res) {
   res.json(req.exp)
 }
 
