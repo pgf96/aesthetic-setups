@@ -17,7 +17,9 @@ body {
   sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-color: var(--tan-4);
+  /* background-color: #222247; */
+  background-color: white;
+  
   padding: 0 0 2vmin 0;
   height: 100vh;
 }
