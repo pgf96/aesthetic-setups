@@ -1,6 +1,7 @@
 import { ImageList, ImageListItem } from "@mui/material"
 import './BattlestationList.css'
-import BattlestationCard from "../BattlestationCard/BattlestationCard"
+// import BattlestationCard from "../BattlestationCard/BattlestationCard"
+import BattlestationC from "../BattlestationC/BattlestationC"
 
 export default function BattlestationList({battlestations}) {
 
@@ -8,7 +9,7 @@ export default function BattlestationList({battlestations}) {
     <div className="BattlestationList">
       <ImageList variant="masonry" cols={3} gap={20}>
         {battlestations ? battlestations.map((battlestation) => (
-          <BattlestationCard battlestation={battlestation} key={battlestation._id}/>
+          <BattlestationC battlestation={battlestation} key={battlestation._id}/>
         )):
         <h1>
           nothing to display
