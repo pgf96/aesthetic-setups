@@ -133,7 +133,7 @@ export default function SignUpForm({showLogin ,setShowLogin, setUser}) {
                   bgcolor: '#4FC03F'
                 }}}
               >
-                Sign In
+                Sign Up
               </Button>
               <Grid container>
                 <Grid item>
