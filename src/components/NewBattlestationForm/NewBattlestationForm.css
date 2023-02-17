@@ -1,0 +1,51 @@
+.NewBattlestationForm {
+    width: 600px;
+    padding: 20px;
+
+  }
+
+  .NewBattlestationForm form {
+    display: flex;
+    flex-direction: column;
+    padding: 40px;
+    border-radius: 20px;
+    background: hsla(218, 24%, 33%, 1);
+    background: radial-gradient(circle, hsla(218, 24%, 33%, 1) 28%, hsla(217, 36%, 18%, 1) 78%);
+    background: -moz-radial-gradient(circle, hsla(218, 24%, 33%, 1) 28%, hsla(217, 36%, 18%, 1) 78%);
+    background: -webkit-radial-gradient(circle, hsla(218, 24%, 33%, 1) 28%, hsla(217, 36%, 18%, 1) 78%);
+    filter: progid: DXImageTransform.Microsoft.gradient( startColorstr="#415069", endColorstr="#1E2B40", GradientType=1 );
+    box-shadow: 2px 2px 2px 3px #080c13;
+  }
+  
+  .NewBattlestationForm label {
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: white;
+  }
+  
+  .NewBattlestationForm input {
+    padding: 0.5rem;
+    font-size: 1rem;
+    padding-bottom: 1rem;
+    margin-bottom: 1.8rem;
+  }
+  
+  .NewBattlestationForm button {
+    padding: 0.5rem;
+    font-size: 1rem;
+    background-color: #6587c2;
+    color: #fff;
+    border: none;
+    border-radius: 0.25rem;
+    cursor: pointer;
+  }
+  .NewBattlestationForm button:hover {
+    background-color: #4FC03F;
+  }
+  
+  @media screen and (min-width: 768px) {
+    .NewBattlestationForm {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+  

@@ -1,0 +1,36 @@
+.navbar {
+    background: rgba(33, 33, 33, 0.085);
+    padding-bottom: 1.9rem;
+    padding-top: 1.9rem;
+    backdrop-filter: blur(6px);
+    position: fixed;
+    top: 0;
+    width: 100%;
+    height: 11.2vh;
+    /* left: 0; */
+}
+
+.navbar * {
+    color: white;
+}
+
+.login-button:hover {
+    background-color: rgb(99, 95, 95);
+    border-color: rgb(99, 95, 95);
+}
+
+.login-button {
+    background-color: black;
+    border-color: rgb(0, 0, 0);
+    border-radius: 60px;
+    height: 3.9vh;
+    width: 8vh;
+}
+
+
+img.logo {
+    height: 120px;
+    width: 100%;
+    /* padding-top: .7rem; */
+    /* padding-bottom: .7rem; */
+}
