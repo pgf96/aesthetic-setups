@@ -5,7 +5,7 @@ const bcrypt = require('bcrypt');
 module.exports = {
   create,
   login,
-  checkToken
+  checkToken,
 };
 
 async function create(req, res) {
@@ -29,7 +29,7 @@ async function login(req,res) {
     throw new Error
 
   } catch (e) {
-    res.status(401).json('bad credentials')
+    res.status(401).json({message: 'bad credentials'})
   }
 }
 
