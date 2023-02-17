@@ -26,7 +26,7 @@ video {
     width: 100%;
     position: absolute;
     top: 0;
-    background-color: rgba(98, 104, 102, 0.382);
+    background-color: rgba(11, 20, 37, 0.658);
     z-index: -1;
 }
 
@@ -43,7 +43,7 @@ video {
 }
 
 .content>h1 {
-    font-size: 15vh;
+    font-size: 12vh;
     color: rgb(234, 234, 234);
     text-shadow: 3px 3px 5px #b4b4b4;
     margin: 10px
