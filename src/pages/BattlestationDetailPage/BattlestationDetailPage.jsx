@@ -26,7 +26,6 @@ export default function BattlestationDetailPage({user, setUser}) {
   }
 
   async function handleApprove() {
-    // await battleStationsAPI.appro
     if (user.roles.includes('admin')) {
       alert('approved')
     } else {
