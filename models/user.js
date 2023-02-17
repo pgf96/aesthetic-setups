@@ -18,6 +18,10 @@ const userSchema = new Schema({
     trim: true,
     minLength: 3,
     required: true
+  },
+  roles: {
+    type: [String],
+    default: ['admin']
   }
 }, {
   timestamps: true,
