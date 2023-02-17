@@ -45,7 +45,7 @@ export default function BattlestationDetailPage({user, setUser}) {
           {battlestation.approved ?
              "": <li style={{color: 'red'}}> "not approved"</li>}
           {/* display approval button if not */}
-          {user.roles.includes('admin') && 
+          {user && user.roles.includes('admin') && 
           <>
             <button onClick={handleDelete}> Delete </button>  
 
