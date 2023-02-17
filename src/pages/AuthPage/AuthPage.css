@@ -1,0 +1,15 @@
+.AuthPage {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color:  rgb(11, 17, 27);
+  border-radius: 2vmin;
+}
+
+.AuthPage h3 {
+  margin-top: 4vmin;
+  text-align: center;
+  color: white;
+  cursor: pointer;
+}
