@@ -2,14 +2,6 @@ const mongoose = require('mongoose')
 const Schema = mongoose.Schema
 
 
-// embed picture
-
-// const imageURL = new Schema({
-//     url: {type: String},
-// },{
-//     timestamps: true
-// })
-
 const itemSchema = new Schema({
     name: {type: String},
     model: {type: String},

@@ -10,7 +10,7 @@ export default function HomePageBanner() {
 
     useEffect(() => {
         if (videoRef.current) {
-            videoRef.current.playbackRate = .79;
+            videoRef.current.playbackRate = 1;
             setTimeout(() => {
                 setIsLoaded(true)
             }, 100)

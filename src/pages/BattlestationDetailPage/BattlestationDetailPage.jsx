@@ -48,7 +48,9 @@ export default function BattlestationDetailPage({user, setUser}) {
           {user.roles.includes('admin') && 
           <>
             <button onClick={handleDelete}> Delete </button>  
-            <button onClick={handleApprove}> approve </button>
+
+            <button onClick={handleApprove}> approve </button> : ""
+
           </>
           }
         </ul>

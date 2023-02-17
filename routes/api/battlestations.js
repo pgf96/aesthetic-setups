@@ -3,7 +3,6 @@ const router = express.Router();
 const battlestationsCtrl = require('../../controllers/api/battlestations')
 const ensureLoggedIn = require('../../config/ensureLoggedIn')
 const requireAuth = require('../../middleware/requireAuth')
-// const requireAdmin = requireAuth.requireAdmin()
 
 router.get('/', battlestationsCtrl.index)
 router.get('/pending', ensureLoggedIn , requireAuth.requireAdmin, battlestationsCtrl.indexPending)
