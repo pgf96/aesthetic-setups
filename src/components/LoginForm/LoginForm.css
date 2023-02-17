@@ -1,0 +1,11 @@
+.MuiOutlinedInput-notchedOutline {
+    border-color: #ffffff !important;
+    color: white !important;;
+}
+
+.MuiInputBase-root {
+    color: white !important;
+}
+.MuiFormLabel-root {
+    color: white !important;
+}
