@@ -11,6 +11,10 @@ export function getAllPending() {
     return sendRequest(`${BASE_URL}/pending`)
 }
 
+export function approvePending(battlestation, id) {
+    return sendRequest(`${BASE_URL}/pending/${id}`, 'PUT' , battlestation)
+}
+
 export function deleteOne(id) {
     return sendRequest(`${BASE_URL}/${id}`, 'DELETE', {id} )
 }
