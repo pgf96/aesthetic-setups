@@ -1,6 +1,7 @@
 import { useState } from "react"
 import * as battlestationsAPI from '../../utilities/battlestations-api'
 import './NewBattlestationForm.css'
+import { useNavigate } from "react-router-dom"
 
 export default function NewBattlestationForm() {
     const [battlestationData, setBattlestationData] = useState({
@@ -8,6 +9,8 @@ export default function NewBattlestationForm() {
         redditUser: '',
         imageURL: '',
     })
+
+    const navigate = useNavigate()
 
     function handleChange(e) {
         setBattlestationData((prevData) => ({
@@ -19,8 +22,14 @@ export default function NewBattlestationForm() {
     
     async function handleSubmit(e) {
         e.preventDefault()
-        const formData = {...battlestationData}
-        const battlestation = await battlestationsAPI.addBattlestation(formData)
+        try {
+            const formData = {...battlestationData}
+            const battlestation = await battlestationsAPI.addBattlestation(formData)
+            navigate('/')
+        } catch {
+            console.log('err')
+        }
+
     }
 
 

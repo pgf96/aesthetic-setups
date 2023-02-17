@@ -19,19 +19,16 @@ export default function BattlestationDetailPage({user, setUser}) {
       setBattlestation(battlestation)
     }
     getById()    
-  }, [id])
+  }, [])
 
   async function handleDelete() {
     await battlestationsAPI.deleteOne(id)
   }
 
   async function handleApprove() {
-    if (user.roles.includes('admin')) {
-      alert('approved')
-    } else {
-      alert('not authorized')
-    }
-
+    const approve = await battlestationsAPI.approvePending(battlestation, id)
+    setBattlestation(approve)
+    navigate('/pending')
   }
 
 
@@ -43,10 +40,10 @@ export default function BattlestationDetailPage({user, setUser}) {
         <img className='image' src={battlestation.imageURL} alt="" />
         <ul>
           <BattlestationTable user={user} setUser={setUser} id={id} battlestation={battlestation} setBattlestation={setBattlestation} />
-          <li> Link: {battlestation.redditLink}</li>
+          <li> Link: <a href={battlestation.redditLink}>{battlestation.redditLink}</a></li>
           <li> User: {battlestation.redditUser}</li>
           {battlestation.approved ?
-            <li> "approved"</li> : <li> "not approved"</li>}
+             "": <li style={{color: 'red'}}> "not approved"</li>}
           {/* display approval button if not */}
           {user.roles.includes('admin') && 
           <>
