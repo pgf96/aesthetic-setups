@@ -1,9 +1,6 @@
 import { ImageList, ImageListItem } from "@mui/material"
 import './BattlestationList.css'
-import { Link } from "react-router-dom"
 import BattlestationCard from "../BattlestationCard/BattlestationCard"
-
-
 
 export default function BattlestationList({battlestations}) {
 
