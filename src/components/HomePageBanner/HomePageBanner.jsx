@@ -5,12 +5,12 @@ import Container from 'react-bootstrap/Container';
 export default function HomePageBanner() {
     const [isLoaded, setIsLoaded] = useState(false);
     const videoRef = useRef(null);
-    const video = 'https://res.cloudinary.com/db6jsod0y/video/upload/v1676621248/pexels-rostislav-uzunov-7670836_2_vodywu.mp4'
+    const video = 'https://res.cloudinary.com/db6jsod0y/video/upload/q_50/v1676621248/pexels-rostislav-uzunov-7670836_2_vodywu.mp4'
 
 
     useEffect(() => {
         if (videoRef.current) {
-            videoRef.current.playbackRate = 1;
+            videoRef.current.playbackRate = .89;
             setTimeout(() => {
                 setIsLoaded(true)
             }, 100)
