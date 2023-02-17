@@ -3,32 +3,24 @@ import * as battlestationsAPI from '../../utilities/battlestations-api'
 import './NewBattlestationForm.css'
 import { useNavigate } from "react-router-dom"
 
-export default function NewBattlestationForm() {
-    const [battlestationData, setBattlestationData] = useState({
+export default function NewBattlestationForm({handleAddNewBattlestation}) {
+    const navigate = useNavigate()
+    const [formData, setFormData] = useState({
         redditLink: '',
         redditUser: '',
         imageURL: '',
     })
 
-    const navigate = useNavigate()
+    
 
     function handleChange(e) {
-        setBattlestationData((prevData) => ({
-            ...prevData,
-            [e.target.name]: e.target.value,
-        }))
+        setFormData({...formData, [e.target.name]: e.target.value})
        
     }
     
     async function handleSubmit(e) {
         e.preventDefault()
-        try {
-            const formData = {...battlestationData}
-            const battlestation = await battlestationsAPI.addBattlestation(formData)
-            navigate('/')
-        } catch {
-            console.log('err')
-        }
+        await handleAddNewBattlestation(formData)
 
     }
 
@@ -36,21 +28,21 @@ export default function NewBattlestationForm() {
 
   return (
     <div className="NewBattlestationForm">
-        <form autoComplete="off" onSubmit={handleSubmit}>
+        <form onSubmit={handleSubmit}>
             <h1 style={{textAlign:'center', color:'white'}}>Create a Post</h1>
             <br />
             <br />
             <br />
             <label>Link to Reddit Post:</label>
-            <input type="text" name="redditLink" onChange={handleChange} required />
+            <input type="text" name="redditLink" value={formData.redditLink} onChange={handleChange} required />
             
             <label>Image URL:</label>
-            <input type="text" name="imageURL" onChange={handleChange} required />
+            <input type="text" name="imageURL" value={formData.imageURL} onChange={handleChange} required />
 
             <label>Reddit Username:</label>
-            <input type="text" name="redditUser" onChange={handleChange} required />
+            <input type="text" name="redditUser" value={formData.redditUser} onChange={handleChange} required />
            
-            <button type="submit" >Submit</button>
+            <button type="submit">Submit</button>
         </form>
     </div>
   )

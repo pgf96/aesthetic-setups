@@ -30,10 +30,17 @@ async function show(req,res) {
 async function create (req,res) {
     const battlestation = new Battlestation(req.body)
     battlestation.save()
+    res.json(battlestation)
 }
 
 async function deleteBattlestation(req,res) {
-    const resp = await Battlestation.deleteOne({_id: req.params.id})
+    try {
+        const resp = await Battlestation.deleteOne({_id: req.params.id})
+        res.json(200).send()
+    } catch(error) {
+        console.log(error)
+
+    }
 }
 
 async function update (req,res) {
