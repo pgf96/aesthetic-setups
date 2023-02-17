@@ -3,8 +3,7 @@ import { useEffect, useState } from 'react';
 import * as battlestationsAPI from '../../utilities/battlestations-api'
 import HomePageBanner from "../../components/HomePageBanner/HomePageBanner"
 import BattlestationList from '../../components/BattlestationList/BattlestationList';
-import { useNavigate } from 'react-router-dom';
-// import { battlestations } from '../../data';
+
 
 const HomePage = () => {
   const [battlestations, setBattlestations] = useState([])
