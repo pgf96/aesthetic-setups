@@ -1,22 +1,22 @@
 import { ImageList, ImageListItem } from "@mui/material"
+import { Link } from "react-router-dom"
 
-export default function BattleStationCard({battlestations}) {
+export default function BattlestationCard({battlestation}) {
+
   return (
     <div>
-      <ImageList variant="masonry" cols={3} gap={30}>
-        {battlestations.map((battlestation) => (
-          <ImageListItem key={battlestation.url}>
-            <img
-              src={`${battlestation.image}?w=220&fit=crop&auto=format`}
-              srcSet={`${battlestation.image}?w=220&fit=crop&auto=format&dpr=2 2x`}
-              alt={""}
-              loading="lazy"
-            />
-            {/* if map idx +1 or idx+2 return none stop */}
-          </ImageListItem> 
-        ))}
-      </ImageList>
-
+    <Link to={`/battlestations/${battlestation._id}`}>
+      <ImageListItem key={battlestation.redditLink}>
+        <img
+          style={{borderRadius:10}}
+          src={`${battlestation.imageURL}?w=220&fit=crop&auto=format`}
+          srcSet={`${battlestation.imageURL}?w=220&fit=crop&auto=format&dpr=2 2x`}
+          alt={""}
+          loading="lazy"
+        />
+      </ImageListItem>
+      </Link>
     </div>
+
   )
 }
