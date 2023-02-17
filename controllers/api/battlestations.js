@@ -10,6 +10,15 @@ async function indexPending(req,res) {
     res.json(battlestations)
 }
 
+async function approvePending(req,res) {
+    const filter = {_id: req.params.id}
+    const update = {approved: true}
+    const battlestation = await Battlestation.findOneAndUpdate(filter, update)
+    console.log(battlestation)
+    res.json(battlestation)
+}
+
+
 async function show(req,res) {
     try {
         const battlestation = await Battlestation.findById(req.params.id)
@@ -46,6 +55,7 @@ async function deleteItem (req,res) {
 module.exports = {
     index,
     indexPending,
+    approvePending,
     create,
     show,
     delete: deleteBattlestation,
