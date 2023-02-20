@@ -9,9 +9,10 @@ import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import { useState, useEffect } from 'react';
 import * as battlestationsAPI from '../../utilities/battlestations-api'
+import * as itemsAPI from '../../utilities/items-api'
 import AddItemBox from '../AddItemBox/AddItemBox';
 
-export default function BattlestationTable({battlestation, setBattlestation, id,user,setUser}) {
+export default function BattlestationTable({battlestation, user, handleDeleteItem, handleAddItem}) {
 
     const [rows, setRows] = useState([])
     const [revealed, setRevealed] = useState(false)
@@ -59,23 +60,20 @@ export default function BattlestationTable({battlestation, setBattlestation, id,
         }
     }, [battlestation]);
 
-    async function handleAddRow(itemData) {
-        const newRow = { name: itemData.name, model: itemData.model };
-        const newItems = [...battlestation.items, newRow];
-        const updatedBattlestation = await battlestationsAPI.updateBattlestationItem(newItems, id)
-        setBattlestation(updatedBattlestation)
-    }
+    // async function handleDeleteRow(itemId) {
+    //     await battlestationsAPI.deleteBattlestationItem(id,item)
+    //     setBattlestation((prevState) => {
+    //         const filteredItems = prevState.items.filter((item) => item._id !== itemId)
+    //         console.log(filteredItems)
+    //         return {
+    //             ...prevState,
+    //             items: filteredItems
+    //         }
+    //     })
+    // }
 
     async function handleDeleteRow(itemId) {
-        const items2 = await battlestationsAPI.deleteBattlestationItem(id,itemId)
-        setBattlestation((prevState) => {
-            const filteredItems = prevState.items.filter((item) => item._id !== itemId)
-            console.log(filteredItems)
-            return {
-                ...prevState,
-                items: filteredItems
-            }
-        })
+        await handleDeleteItem(itemId)
     }
 
     function toggleAddItemBox() {
@@ -98,14 +96,18 @@ export default function BattlestationTable({battlestation, setBattlestation, id,
                                 {row.name}
                             </StyledTableCell>
                             <StyledTableCell align="right">{row.model}&nbsp;
-                            {user.roles.includes('admin') && <button onClick={() => handleDeleteRow(row._id)}>x&nbsp;</button>}
+                            {/* if there is a user and the user is an admin */}
+                            {/* {user && user.roles.includes('admin') && <button onClick={() => handleDeleteItem(row._id)}>x&nbsp;</button>} */}
+                            {user && user.roles.includes('admin') && <button onClick={() => handleDeleteRow(row._id)}>x&nbsp;</button>}
                             </StyledTableCell>
                         </StyledTableRow>
                     ))}
                 </TableBody>
             </Table>
-            <button onClick={toggleAddItemBox}> + </button>
-            {revealed && <AddItemBox handleAddRow={handleAddRow} />}
+            {!user && <button disabled style={{color: 'white'}}> login to add item</button>}
+            {/* if there is a user display the add item button */}
+            {user && <button onClick={toggleAddItemBox}> + </button> }
+            {revealed && <AddItemBox handleAddItem={handleAddItem} />}
         </TableContainer>
         
     );

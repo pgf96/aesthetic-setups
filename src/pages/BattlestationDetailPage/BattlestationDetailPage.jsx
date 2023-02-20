@@ -5,6 +5,7 @@ import { useParams } from "react-router-dom"
 import { useEffect, useState } from "react"
 import { useNavigate } from 'react-router-dom'
 import * as battlestationsAPI from '../../utilities/battlestations-api'
+import * as itemsAPI from '../../utilities/items-api'
 import { Container } from 'react-bootstrap'
 import BattlestationTable from '../../components/BattlestationTable/BattlestationTable'
 
@@ -23,6 +24,7 @@ export default function BattlestationDetailPage({user, setUser}) {
 
   async function handleDelete() {
     await battlestationsAPI.deleteOne(id)
+    navigate('/')
   }
 
   async function handleApprove() {
@@ -31,15 +33,33 @@ export default function BattlestationDetailPage({user, setUser}) {
     navigate('/pending')
   }
 
+  async function handleDeleteItem(itemId) {
+    await itemsAPI.deleteItem(id, itemId)
+    setBattlestation((prevData) => {
+      const itemList = prevData.items.filter((item) => item._id !== itemId)
+      return {
+          ...prevData,
+          items: itemList
+      }})
+  }
+
+  async function handleAddItem(itemData) {
+    const newItemList = await itemsAPI.addItem(itemData, id)
+    setBattlestation(prevData => ({
+      ...prevData, 
+      items: newItemList
+    }))
+  }
+  
 
 
 
   return (
     <div className='BattlestationDetailPage'>
-      <Container className='detail'>
+      <Container className='detail'>  
         <img className='image' src={battlestation.imageURL} alt="" />
         <ul>
-          <BattlestationTable user={user} setUser={setUser} id={id} battlestation={battlestation} setBattlestation={setBattlestation} />
+          <BattlestationTable user={user} battlestation={battlestation} handleDeleteItem={handleDeleteItem} handleAddItem={handleAddItem}/>
           <li> Link: <a href={battlestation.redditLink}>{battlestation.redditLink}</a></li>
           <li> User: {battlestation.redditUser}</li>
           {battlestation.approved ?
@@ -48,22 +68,13 @@ export default function BattlestationDetailPage({user, setUser}) {
           {user && user.roles.includes('admin') && 
           <>
             <button onClick={handleDelete}> Delete </button>  
-
-            <button onClick={handleApprove}> approve </button> : ""
-
+            {battlestation.approved == !true &&
+            <button onClick={handleApprove}> approve </button> 
+            }
           </>
           }
         </ul>
-
-
-
-
-
       </Container>
-
-
-
-
     </div>
   )
 }
