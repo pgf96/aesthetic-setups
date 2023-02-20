@@ -48,14 +48,20 @@ async function update (req,res) {
     const update = {items: req.body}
     const options = {new: true}
     const updatedItems = await Battlestation.findOneAndUpdate(filter, update, options)
+    console.log(updatedItems)
     res.json(updatedItems)
 }
 
 async function deleteItem (req,res) {
-    const itemId = req.params.itemId
-    const filter = { $pull : { items: {_id: itemId }}}
-    const deleted = await Battlestation.findOneAndUpdate({ $pull : { items: {_id: itemId }}})
-    res.json(deleted)
+    const filter = {_id: req.params.id}
+    const update = { $pull: { items: { _id: req.params.itemId}}}
+    const options = {new: true}
+    // const filter = { $pull : { items: {_id: itemId }}}
+    // const b = await Battlestation.findOneAndUpdate({_id: req.params.id}, { $pull: { items: { _id: itemId}}})
+    const updatedBattlestation = await Battlestation.findOneAndUpdate(filter, update, options)
+    const updatedItems = battlestation.items
+
+    res.json(b)
 
 }
 
