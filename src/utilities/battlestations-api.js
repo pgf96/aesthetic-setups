@@ -27,10 +27,3 @@ export function addBattlestation(battlestationData) {
     return sendRequest(`${BASE_URL}`, 'POST' , battlestationData)
 }
 
-export function updateBattlestationItem(battlestation, id) {
-    return sendRequest(`${BASE_URL}/${id}`, 'PUT' , battlestation)
-}
-
-export function deleteBattlestationItem(id, itemId) {
-    return sendRequest(`${BASE_URL}/${id}/items/${itemId}`, 'PUT')
-}
