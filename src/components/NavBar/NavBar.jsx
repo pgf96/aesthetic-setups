@@ -26,6 +26,8 @@ export default function NavBar({ user, setUser }) {
           <Nav className="me-auto">
             <Nav.Link as={Link} to='/'>Home</Nav.Link>
             <Nav.Link as={Link} to='/battlestations/new'>Add</Nav.Link>
+            <Nav.Link as={Link} to='/pending'>Pending</Nav.Link>  
+            
             {/* <Link to='/'>Home</Link> */}
             {/* <Link to='/battlestations/new'> Add</Link> */}
           </Nav>
