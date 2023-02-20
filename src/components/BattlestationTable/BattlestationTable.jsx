@@ -6,10 +6,7 @@ import TableCell, { tableCellClasses } from '@mui/material/TableCell';
 import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
-import Paper from '@mui/material/Paper';
 import { useState, useEffect } from 'react';
-import * as battlestationsAPI from '../../utilities/battlestations-api'
-import * as itemsAPI from '../../utilities/items-api'
 import AddItemBox from '../AddItemBox/AddItemBox';
 
 export default function BattlestationTable({battlestation, user, handleDeleteItem, handleAddItem}) {
@@ -59,18 +56,6 @@ export default function BattlestationTable({battlestation, user, handleDeleteIte
             setRows(battlestation.items);
         }
     }, [battlestation]);
-
-    // async function handleDeleteRow(itemId) {
-    //     await battlestationsAPI.deleteBattlestationItem(id,item)
-    //     setBattlestation((prevState) => {
-    //         const filteredItems = prevState.items.filter((item) => item._id !== itemId)
-    //         console.log(filteredItems)
-    //         return {
-    //             ...prevState,
-    //             items: filteredItems
-    //         }
-    //     })
-    // }
 
     async function handleDeleteRow(itemId) {
         await handleDeleteItem(itemId)

@@ -1,6 +1,5 @@
 import './HomePageBanner.css'
 import { useRef, useEffect, useState } from 'react';
-import Container from 'react-bootstrap/Container';
 
 export default function HomePageBanner() {
     const [isLoaded, setIsLoaded] = useState(false);
@@ -19,9 +18,7 @@ export default function HomePageBanner() {
 
     return (
         <div className='banner'>
-            {/* <video ref={videoRef} src={video} autoPlay loop muted */}
             <video ref={videoRef} src={video} autoPlay loop muted
-
                 style={{ opacity: isLoaded ? 1 : 0, 
                 transition: 'opacity 1s ease-in-out' }}/>
             <div className='cover' ></div>

@@ -2,8 +2,12 @@ import { Link } from "react-router-dom"
 import { ImageListItem } from "@mui/material"
 export default function BattlestationC({battlestation}) {
 
+  function handleOnClick() {
+    console.log('wuuuuuuuuut')
+  }
+
   return (
-    <div>
+    <div onClick={handleOnClick}>
     <Link to={`/battlestations/${battlestation._id}`}>
       <ImageListItem key={battlestation.redditLink}>
         <img

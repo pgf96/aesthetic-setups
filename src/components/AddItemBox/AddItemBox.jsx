@@ -3,7 +3,7 @@ import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import { useState } from 'react';
 
-export default function AddItemBox({handleAddRow}) {
+export default function AddItemBox({handleAddItem}) {
     const [itemData, setItemData] = useState({
         name: '',
         model: ''
@@ -18,7 +18,7 @@ export default function AddItemBox({handleAddRow}) {
     
     async function handleSubmit(e) {
         e.preventDefault()
-        handleAddRow(itemData)
+        handleAddItem(itemData)
         setItemData(prevData => ({
             ...prevData,
             'name':'',
