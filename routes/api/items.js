@@ -3,6 +3,6 @@ const router = express.Router();
 const itemsCtrl = require('../../controllers/api/items')
 
 router.post('/:id/items', itemsCtrl.create)
-// router.delete('/:id/items/:itemId')
+router.delete('/:id/items/:itemId', itemsCtrl.delete)
 
 module.exports = router

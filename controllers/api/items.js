@@ -9,6 +9,17 @@ async function create(req,res) {
     res.json(newItemList)
 }
 
+async function deleteItem (req,res) {
+    const filter = {_id: req.params.id}
+    const update = { $pull: { items: { _id: req.params.itemId}}}
+    const options = {new: true}
+    const updatedBattlestation = await Battlestation.findOneAndUpdate(filter, update, options)
+    console.log(updatedBattlestation)
+    res.json(updatedBattlestation)
+
+}
+
 module.exports = {
-    create
+    create,
+    delete: deleteItem,
 }
