@@ -43,28 +43,6 @@ async function deleteBattlestation(req,res) {
     }
 }
 
-async function update (req,res) {
-    const filter = {_id: req.params.id}
-    const update = {items: req.body}
-    const options = {new: true}
-    const updatedItems = await Battlestation.findOneAndUpdate(filter, update, options)
-    console.log(updatedItems)
-    res.json(updatedItems)
-}
-
-async function deleteItem (req,res) {
-    const filter = {_id: req.params.id}
-    const update = { $pull: { items: { _id: req.params.itemId}}}
-    const options = {new: true}
-    // const filter = { $pull : { items: {_id: itemId }}}
-    // const b = await Battlestation.findOneAndUpdate({_id: req.params.id}, { $pull: { items: { _id: itemId}}})
-    const updatedBattlestation = await Battlestation.findOneAndUpdate(filter, update, options)
-    const updatedItems = battlestation.items
-
-    res.json(b)
-
-}
-
 module.exports = {
     index,
     indexPending,
@@ -72,6 +50,4 @@ module.exports = {
     create,
     show,
     delete: deleteBattlestation,
-    update,
-    deleteItem,
 }
