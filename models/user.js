@@ -21,7 +21,19 @@ const userSchema = new Schema({
   },
   roles: {
     type: [String],
-    default: ['user']
+    default: ['user'],  
+    validate: {
+      validator: function(roles) {
+        return roles.every(role => role === 'user' || role === 'guest')
+      },
+      message: 'cannot create a role other than user or guest'
+      
+    },
+    // lowercase: true does not work  
+    // change role to lowercase before saving to db
+    set: function(roles) {
+      return roles.map(role => role.toLowerCase())
+    }
   }
 }, {
   timestamps: true,
@@ -40,5 +52,6 @@ userSchema.pre('save', async function(next) {
   this.password = await bcrypt.hash(this.password, SALT_ROUNDS);
   return next();
 });
+
 
 module.exports = mongoose.model('User', userSchema);

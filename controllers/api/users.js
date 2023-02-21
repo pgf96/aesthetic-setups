@@ -14,7 +14,9 @@ async function create(req, res) {
     const token = createJWT(user);
     res.json(token);
   } catch (e) {
-    res.status(400).json(e);
+    if(e.code === 11000) {
+      res.status(409).json(`Duplicate with ${e.keyValue.email}`)
+    } else res.status(400).json(e);
   }
 }
 
@@ -29,7 +31,7 @@ async function login(req,res) {
     throw new Error
 
   } catch (e) {
-    res.status(401).json({message: 'bad credentials'})
+    res.status(401).json({message: 'Invalid email or password'})
   }
 }
 
