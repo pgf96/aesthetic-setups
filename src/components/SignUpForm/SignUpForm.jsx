@@ -39,7 +39,7 @@ export default function SignUpForm({showLogin ,setShowLogin, setUser}) {
             const user = await usersService.signUp(formData)
             setUser(user)
         } catch {
-            setError('');
+            setError('Sign Up failed');
         }
     }
 
@@ -88,7 +88,7 @@ export default function SignUpForm({showLogin ,setShowLogin, setUser}) {
                 label="Name"
                 name="name"
                 onChange={handleChange} 
-                autoComplete="name"
+                autoComplete="off"
                 autoFocus
               />
               <TextField
@@ -99,7 +99,7 @@ export default function SignUpForm({showLogin ,setShowLogin, setUser}) {
                 label="Email Address"
                 name="email"
                 onChange={handleChange} 
-                autoComplete="email"
+                autoComplete="off"
                 autoFocus
               />
               <TextField
@@ -111,7 +111,7 @@ export default function SignUpForm({showLogin ,setShowLogin, setUser}) {
                 label="Password"
                 type="password"
                 id="password"
-                autoComplete="current-password"
+                autoComplete="off"
               />
               <TextField
                 margin="normal"
@@ -122,8 +122,9 @@ export default function SignUpForm({showLogin ,setShowLogin, setUser}) {
                 label="confirm password"
                 type="password"
                 id="password"
-                autoComplete="current-password"
+                autoComplete="off"
               />
+              {error && <p style={{color: 'red'}}>&nbsp;{error}</p>}
               <Button
                 type="submit"
                 fullWidth
