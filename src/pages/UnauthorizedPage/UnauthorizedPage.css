@@ -1,0 +1,10 @@
+.UnauthorizedPage {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.UnauthorizedPage h1 {
+    color: white;
+}
