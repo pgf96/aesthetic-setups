@@ -14,22 +14,18 @@ async function approvePending(req,res) {
     const filter = {_id: req.params.id}
     const update = {approved: true}
     const battlestation = await Battlestation.findOneAndUpdate(filter, update)
-    console.log(battlestation)
     res.json(battlestation)
 }
 
 
 async function show(req,res) {
-    try {
-        const battlestation = await Battlestation.findById(req.params.id)
-        res.json(battlestation)
-    } catch {
-    }
+    const battlestation = await Battlestation.findById(req.params.id)
+    res.json(battlestation)
 }
 
 async function create (req,res) {
-    const battlestation = new Battlestation(req.body)
-    battlestation.save()
+    req.body.user = req.user
+    const battlestation = await Battlestation.create(req.body)
     res.json(battlestation)
 }
 
