@@ -16,12 +16,14 @@
 MongoDB, Express, React, NodeJS, Python, Bootsrap, MaterialUI
 
 ## Next Steps
-☐ Refactor tokens to be stored in cookies ( localstorage -> cookie)
+-[] Protect routes on front end
 
-☐ Add media hosting service
+-[] Refactor tokens to be stored in cookies ( localstorage -> cookie)
 
-☐ Add tags to picture that are linked to items in a table
+-[] Add media hosting service
 
-☐ Design for mobile
+-[] Add tags to picture that are linked to items in a table
 
-☐ Train ML model to identify items in pictures
+-[] Design for mobile
+
+-[] Train ML model to identify items in pictures
