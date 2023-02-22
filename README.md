@@ -13,17 +13,23 @@
 ![](public/images/erd.png)
 
 ## Built with
-MongoDB, Express, React, NodeJS, Python, Bootsrap, MaterialUI
+MongoDB, Express, React, NodeJS, Python, Bootstrap, MaterialUI, Cloudinary
 
 ## Next Steps
--[] Protect routes on front end
+- [x] Protect routes on back end
 
--[] Refactor tokens to be stored in cookies ( localstorage -> cookie)
+- [x] Protect routes on front end
 
--[] Add media hosting service
+- [x] Add user permissions
 
--[] Add tags to picture that are linked to items in a table
+- [ ] create guest account 
 
--[] Design for mobile
+- [ ] Refactor tokens to be stored in cookies ( localstorage -> cookie)
 
--[] Train ML model to identify items in pictures
+- [x] Add media hosting service
+
+- [ ] Add tags to picture that are linked to items in a table
+
+- [ ] Design for mobile
+
+- [ ] Train ML model to identify items in pictures
