@@ -84,7 +84,7 @@ export default function LoginForm({showLogin ,setShowLogin, setUser}) {
                 name="email"
                 value={credentials.email}
                 onChange={handleChange} 
-                autoComplete="email"
+                autoComplete="off"
                 autoFocus
               />
               <TextField
@@ -97,7 +97,7 @@ export default function LoginForm({showLogin ,setShowLogin, setUser}) {
                 label="Password"
                 type="password"
                 id="password"
-                autoComplete="current-password"
+                autoComplete="off"
               />
               <Button
                 type="submit"
