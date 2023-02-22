@@ -1,7 +1,7 @@
 const Battlestation = require('../../models/battlestation')
 
 async function create(req,res) {
-    console.log(req.body)
+    req.body.user = req.user._id
     const battlestation = await Battlestation.findById({_id: req.params.id})
     const newItemList = battlestation.items
     newItemList.push(req.body)
@@ -14,7 +14,6 @@ async function deleteItem (req,res) {
     const update = { $pull: { items: { _id: req.params.itemId}}}
     const options = {new: true}
     const updatedBattlestation = await Battlestation.findOneAndUpdate(filter, update, options)
-    console.log(updatedBattlestation)
     res.json(updatedBattlestation)
 
 }
