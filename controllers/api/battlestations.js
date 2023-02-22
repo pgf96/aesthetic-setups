@@ -24,7 +24,7 @@ async function show(req,res) {
 }
 
 async function create (req,res) {
-    req.body.user = req.user
+    req.body.user = req.user._id
     const battlestation = await Battlestation.create(req.body)
     res.json(battlestation)
 }
