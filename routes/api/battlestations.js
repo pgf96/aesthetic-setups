@@ -2,13 +2,13 @@ const express = require('express');
 const router = express.Router();
 const battlestationsCtrl = require('../../controllers/api/battlestations')
 const ensureLoggedIn = require('../../config/ensureLoggedIn')
-const requireAuth = require('../../middleware/requireAuth')
+const { requireAdmin } = require('../../middleware/requireAuth')
 
 router.get('/', battlestationsCtrl.index)
-router.get('/pending', ensureLoggedIn , requireAuth.requireAdmin, battlestationsCtrl.indexPending)
 router.get('/:id', battlestationsCtrl.show)
-router.put('/pending/:id', battlestationsCtrl.approvePending)
-router.delete('/:id', ensureLoggedIn , requireAuth.requireAdmin, battlestationsCtrl.delete)
+router.get('/pending', ensureLoggedIn , requireAdmin, battlestationsCtrl.indexPending)
+router.put('/pending/:id',  ensureLoggedIn , requireAdmin, battlestationsCtrl.approvePending)
+router.delete('/:id', ensureLoggedIn , requireAdmin, battlestationsCtrl.delete)
 router.post('/', ensureLoggedIn,  battlestationsCtrl.create)
 
 
