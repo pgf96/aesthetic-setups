@@ -2,15 +2,19 @@
 
 import './BattlestationDetailPage.css'
 import { useParams } from "react-router-dom"
+import { useRef } from 'react'
 import { useEffect, useState } from "react"
 import { useNavigate } from 'react-router-dom'
 import * as battlestationsAPI from '../../utilities/battlestations-api'
 import * as itemsAPI from '../../utilities/items-api'
 import { Container } from 'react-bootstrap'
 import BattlestationTable from '../../components/BattlestationTable/BattlestationTable'
+import ImageTagger from '../../components/ImageTagger/ImageTagger'
 
 export default function BattlestationDetailPage({user, setUser}) {
   const [battlestation, setBattlestation] = useState({})
+  const [clickCoordinates, setClickCoordinates] = useState([]);
+
   const { id } = useParams()
   const navigate = useNavigate()
 
@@ -51,13 +55,15 @@ export default function BattlestationDetailPage({user, setUser}) {
     }))
   }
   
+  const svgRef = useRef(null)
 
 
 
   return (
     <div className='BattlestationDetailPage'>
       <Container className='detail'>  
-        <img className='image' src={battlestation.imageURL} alt="" />
+        <img className='image' ref={svgRef} src={battlestation.imageURL} alt="" />
+        <ImageTagger svgRef={svgRef}/>
         <ul>
           <BattlestationTable user={user} battlestation={battlestation} handleDeleteItem={handleDeleteItem} handleAddItem={handleAddItem}/>
           <li> Link: <a href={battlestation.redditLink}>{battlestation.redditLink}</a></li>

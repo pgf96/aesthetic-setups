@@ -28,11 +28,11 @@
 }
 
 .image {
-    flex-direction: column;
+    /* flex-direction: column; */
     justify-self: center;
     align-items: center;
-    max-width: 57vw;
-    max-height: 81vh;
+    max-width: 1000px;
+    max-height: 800px;
     box-shadow: 0 0 7px 2px rgba(255, 255, 255, 0.295);
 
 }
