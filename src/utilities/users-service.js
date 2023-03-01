@@ -28,7 +28,10 @@ export async function signUp(userData) {
 
   export function getUser() {
     const token = getToken();
-    return token ? JSON.parse(window.atob(token.split('.')[1])).user : null;
+    const user = token ? JSON.parse(window.atob(token.split('.')[1])).user : null;
+    // console.log(user.roles)
+    // return token ? JSON.parse(window.atob(token.split('.')[1])).user : null;
+    return user
   }
 
   export function logOut() {
@@ -38,4 +41,9 @@ export async function signUp(userData) {
   export function checkToken() {
     return usersAPI.checkToken()
     .then(dateStr => new Date(dateStr))
+  }
+
+  export function getRoles() {
+    return getUser().roles
+    
   }
