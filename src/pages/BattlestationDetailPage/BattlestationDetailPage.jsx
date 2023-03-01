@@ -62,8 +62,8 @@ export default function BattlestationDetailPage({user, setUser}) {
   return (
     <div className='BattlestationDetailPage'>
       <Container className='detail'>  
-        <img className='image' ref={svgRef} src={battlestation.imageURL} alt="" />
-        <ImageTagger svgRef={svgRef}/>
+        {/* <img className='image' ref={svgRef} src={battlestation.imageURL} alt="" /> */}
+        <ImageTagger battlestation={battlestation}/>
         <ul>
           <BattlestationTable user={user} battlestation={battlestation} handleDeleteItem={handleDeleteItem} handleAddItem={handleAddItem}/>
           <li> Link: <a href={battlestation.redditLink}>{battlestation.redditLink}</a></li>
