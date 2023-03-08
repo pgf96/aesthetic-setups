@@ -1,10 +1,11 @@
 import Cursor from "../Cursor/Cursor";
+import './ImageTagger.css'
 import { useState, useEffect, useRef } from "react";
 import { EditableAnnotation, Label, Connector, CircleSubject } from "@visx/annotation";
 
-export default function ImageTagger({ battlestation}) {
+export default function ImageTagger({ battlestation, handleUpdateAllItemPositions }) {
 
-    
+
     const [isEditable, setIsEditable] = useState(false)
     const [clickCoordinates, setClickCoordinates] = useState([]);
     const [annotationData, setAnnotationData] = useState([])
@@ -19,18 +20,36 @@ export default function ImageTagger({ battlestation}) {
         width: 200,
         height: 100,
         id: 3
-      })
+    })
 
     const inputRef = useRef(null)
     const svgRef = useRef(null)
+    const imgRef = useRef(null)
 
     useEffect(function () {
         function getItems() {
-            const items = battlestation.items
-            setUnsavedAnnotation(items) 
-        } 
+            setUnsavedAnnotation(battlestation.items)
+        }
+        function setSvgWidthHeight() {
+            const img = imgRef.current
+            const svg = svgRef.current
+            if (img && svg) {
+                svg.setAttribute('width', img.width)
+                svg.setAttribute('height', img.height);
+            }
+        }
         getItems()
+        setSvgWidthHeight()
     }, [battlestation])
+
+    // useEffect(() => {
+    //     const img = imgRef.current
+    //     const svg = svgRef.current
+    //     if (img && svg) {
+    //         svg.setAttribute('width', img.width)
+    //         svg.setAttribute('height', img.height);
+    //     }
+    // },[])
 
 
     function handleSubmit(e) {
@@ -55,9 +74,12 @@ export default function ImageTagger({ battlestation}) {
         );
     }
 
-    function handleAnnotationSave() {
-        setAnnotationData(unsavedAnnotation)
+    function handleAnnotationSave(e) {
+        e.preventDefault()
+        handleUpdateAllItemPositions(unsavedAnnotation)
     }
+
+
 
     function handleCheck() {
         setIsEditable(!isEditable)
@@ -66,14 +88,15 @@ export default function ImageTagger({ battlestation}) {
 
     return (
         <div>
-            {/* <Cursor svgRef={svgRef} inputRef={inputRef} setClickCoordinates={setClickCoordinates} setAnnotationData={setAnnotationData} /> */}
-            <Cursor  svgRef={svgRef} setClickCoordinates={setClickCoordinates}  />
+
+            <Cursor svgRef={svgRef} setClickCoordinates={setClickCoordinates} />
             <div>
                 The mouse is at position{' '}
                 <b>({clickCoordinates.x}, {clickCoordinates.y})</b>
                 <div>
                     <label> edit </label>
                     <input type="checkbox" name='edit' onChange={handleCheck} />
+                    <button onClick={handleAnnotationSave}> click </button>
                 </div>
                 <div>
                     <form onSubmit={handleSubmit}>
@@ -87,23 +110,25 @@ export default function ImageTagger({ battlestation}) {
                             <button type="submit">add to unsaved annotations</button>
                         </div>
                     </form>
-                    <button onClick={handleAnnotationSave}> save annotations </button>
                 </div>
             </div>
-            <div style={{ position: 'absolute' }}>
+
+            <div style={{ position: 'relative' }}>
                 <img
+                    ref={imgRef}
                     src={battlestation.imageURL}
-                    style={{ width: '1000px', height: '700px' }}
+                    // style={{ position: 'absolute', width: '45rem', height: '30rem' }}
+                    style={{ position: 'absolute', maxWidth:'100%', height: 'auto' }}
                 />
                 <svg
                     ref={svgRef}
                     style={{
                         position: 'absolute',
-                        left: '0px',
-                        top: '0px',
-                        width: '1000px', height: '700px'
+                        left: '0',
+                        top: '0',
+                        // width & height set in useEffect
                     }}>
-                        {unsavedAnnotation && unsavedAnnotation.map((annotation) => (
+                    {unsavedAnnotation && unsavedAnnotation.map((annotation) => (
                         <EditableAnnotation
                             key={annotation._id}
                             x={annotation.x}
@@ -127,11 +152,13 @@ export default function ImageTagger({ battlestation}) {
                                 showBackground={true}
                                 backgroundFill={'rgba(0, 0, 0, 0.3)'}
                                 anchorLineStroke={'black'}
+                                titleFontSize={'11'}
                             />
                         </EditableAnnotation>
                     ))}
                 </svg>
             </div>
+
         </div>
-      );
-    };
+    );
+};
