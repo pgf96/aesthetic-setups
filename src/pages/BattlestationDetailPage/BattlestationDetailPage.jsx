@@ -54,6 +54,14 @@ export default function BattlestationDetailPage({user, setUser}) {
       items: newItemList
     }))
   }
+
+  async function handleUpdateAllItemPositions(itemPositions) {
+    // console.log(itemPositions)
+    const updatedItems = await itemsAPI.updateAllItemPositions(id, itemPositions)
+    console.log(updatedItems)
+    setBattlestation(prevData => ({...prevData, items:updatedItems.items}))
+    
+  }
   
   const svgRef = useRef(null)
 
@@ -63,10 +71,10 @@ export default function BattlestationDetailPage({user, setUser}) {
     <div className='BattlestationDetailPage'>
       <Container className='detail'>  
         {/* <img className='image' ref={svgRef} src={battlestation.imageURL} alt="" /> */}
-        <ImageTagger battlestation={battlestation}/>
+        <ImageTagger battlestation={battlestation} handleUpdateAllItemPositions={handleUpdateAllItemPositions}/>
         <ul>
           <BattlestationTable user={user} battlestation={battlestation} handleDeleteItem={handleDeleteItem} handleAddItem={handleAddItem}/>
-          <li> Link: <a href={battlestation.redditLink}>{battlestation.redditLink}</a></li>
+          <li> Link: <a href={battlestation.redditLink}>Click </a></li>
           <li> User: {battlestation.redditUser}</li>
           {battlestation.approved ?
              "": <li style={{color: 'red'}}> "not approved"</li>}

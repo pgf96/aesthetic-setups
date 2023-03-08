@@ -1,11 +1,13 @@
 .container.detail {
     display: grid;
-    grid-template-columns: 1.2fr 1fr;
+    grid-template-columns: 1.5fr .5fr;
     justify-content: center;
-    grid-column-gap: 2px;
+    grid-column-gap: 2rem;
     background-color: rgb(11, 17, 27);
     margin-top: 12rem;
-    max-width: 100%;
+    max-height: auto;
+    /* margin-left: 2rem; */
+    /* margin-right: 2rem; */
 }
 
 .BattlestationDetailPage {

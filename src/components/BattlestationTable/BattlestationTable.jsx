@@ -67,7 +67,7 @@ export default function BattlestationTable({battlestation, user, handleDeleteIte
 
     return (
         <TableContainer >
-            <Table sx={{ minWidth: 700 }} aria-label="customized table">
+            <Table sx={{ width: 400 }} aria-label="customized table">
                 <TableHead>
                     <TableRow>
                         <StyledTableCell>Item </StyledTableCell>
