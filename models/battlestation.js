@@ -10,8 +10,8 @@ const itemSchema = new Schema({
     y: {type: Number, default: 30},
     dx: {type: Number, default: 120},
     dy: {type: Number, default: 60},
-    width: {type: Number, default: 200},
-    height: {type: Number, default: 100},
+    width: {type: Number, default: 170},
+    height: {type: Number, default: 70},
     user: {type: Schema.Types.ObjectId, ref: 'User'},
 }, {
     timestamps: true
