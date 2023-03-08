@@ -18,7 +18,16 @@ async function deleteItem (req,res) {
 
 }
 
+async function updateAllPositions(req, res) {
+    const battlestation = await Battlestation.findOne({_id: req.params.id})
+    battlestation.items = req.body
+    battlestation.save()
+    const updatedItems = battlestation.items
+    res.json(battlestation)
+}
+
 module.exports = {
     create,
     delete: deleteItem,
+    updateAllPositions
 }

@@ -9,3 +9,7 @@ export function addItem(itemData, id) {
 export function deleteItem(id, itemId) {
     return sendRequest(`${BASE_URL}/${id}/items/${itemId}`, 'DELETE')
 }
+
+export function updateAllItemPositions(id, itemPositions) {
+    return sendRequest(`${BASE_URL}/${id}/items/`, 'PUT', itemPositions)
+}
