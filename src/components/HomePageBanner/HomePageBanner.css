@@ -32,7 +32,7 @@ video {
 
 .content {
     height: 70%;
-    width: 60%;
+    width: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -43,12 +43,61 @@ video {
 }
 
 .content>h1 {
-    font-size: 12vh;
+    /* font-size: 12vh; */
+    font-size: 4.0vw;
     color: rgb(234, 234, 234);
     text-shadow: 3px 3px 5px #b4b4b4;
-    margin: 10px
+    /* margin: 10px */
 }
 
-h2 {
+.content>h2 {
+    font-size: 1.2vw;
     color: white;
+}
+
+@media screen and (max-width: 1440px) {
+    .content>h1 {
+        font-size: 5rem;
+    }
+    .content>h2 {
+        font-size: 1.3rem;
+    }
+    
+}
+
+@media screen and (max-width: 1024px) {
+    .content>h1 {
+        font-size: 4rem;
+    }
+    .content>h2 {
+        font-size: 1.1rem;
+    }
+    
+}
+
+@media screen and (max-width: 768px) {
+    .content>h1 {
+        font-size: 5rem;
+    }
+    .content>h2 {
+        font-size: 1.4rem;
+    }
+}
+
+@media screen and (max-width: 425px) {
+    .content>h1 {
+        font-size: 3.0rem;
+    }
+    .content>h2 {
+        font-size: .8rem;
+    }
+}
+
+@media screen and (max-width: 375px) {
+    .content>h1 {
+        font-size: 2.8rem;
+    }
+    .content>h2 {
+        font-size: .8rem;
+    }
 }
