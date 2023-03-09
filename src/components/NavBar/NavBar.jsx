@@ -19,36 +19,29 @@ export default function NavBar({ user, setUser }) {
     return null
   }
   return (
-    <Navbar className='navbar' variant='dark' expand="lg" sticky='top' >
-      <Container fluid>
+    // <Container fluid>
+      <Navbar className='navbar' variant='dark' expand="lg" sticky='top' >
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
+        <Navbar.Brand>
+          <img className='logo' src='https://res.cloudinary.com/db6jsod0y/image/upload/v1676591418/The_world_studios-removebg-preview_p1rfcf.png'></img>
+        </Navbar.Brand>
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="me-auto">
             <Nav.Link as={Link} to='/'>Home</Nav.Link>
             <Nav.Link as={Link} to='/battlestations/new'>Add</Nav.Link>
-            <Nav.Link as={Link} to='/pending'>Pending</Nav.Link>  
-            
-            {/* <Link to='/'>Home</Link> */}
-            {/* <Link to='/battlestations/new'> Add</Link> */}
+            <Nav.Link as={Link} to='/pending'>Pending</Nav.Link>
           </Nav>
-        <Nav className='me-auto'>
-          <Navbar.Brand className='brand-center'>
-            <img className='logo' src='https://res.cloudinary.com/db6jsod0y/image/upload/v1676591418/The_world_studios-removebg-preview_p1rfcf.png'></img>
-          </Navbar.Brand>
-        </Nav>
-          <Nav className='ml-auto'>
+          <Nav>
             <UserLogOut user={user} setUser={setUser} />
             {!user ?
-              <Nav.Link as={Link} to='/auth/login'>
-                <Button className='login-button'>
+              <Nav.Link className='login-nav' as={Link} to='/auth/login'>
                   login
-                </Button>
-              </Nav.Link> 
-            : 
-            ""}
+              </Nav.Link>
+              :
+              ""}
           </Nav>
         </Navbar.Collapse>
-      </Container>
-    </Navbar>
+      </Navbar>
+    // </Container>
   );
 }
