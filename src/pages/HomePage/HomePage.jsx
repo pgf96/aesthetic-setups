@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react';
 import * as battlestationsAPI from '../../utilities/battlestations-api'
 import HomePageBanner from "../../components/HomePageBanner/HomePageBanner"
 import BattlestationList from '../../components/BattlestationList/BattlestationList';
+import { Container } from 'react-bootstrap';
 
 
 const HomePage = () => {
@@ -23,7 +24,10 @@ const HomePage = () => {
     <div className='HomePage'>
       {/* navbar. after they go past a certain vh render it and sticky it to the top */}
       <HomePageBanner />
+      <Container>
+
       <BattlestationList battlestations={battlestations}/>
+      </Container>
     </div>
   )
 }
