@@ -10,13 +10,16 @@ import * as itemsAPI from '../../utilities/items-api'
 import { Container } from 'react-bootstrap'
 import BattlestationTable from '../../components/BattlestationTable/BattlestationTable'
 import ImageTagger from '../../components/ImageTagger/ImageTagger'
+import Footer from '../../components/Footer/Footer'
 import { useMediaQuery } from 'react-responsive'
 import { useMemo } from 'react'
 import { scaleLinear } from '@visx/scale'
 
+
 export default function BattlestationDetailPage({user, setUser}) {
   const [battlestation, setBattlestation] = useState({})
   const [clickCoordinates, setClickCoordinates] = useState([]);
+  const [loaded, setLoaded] = useState(false)
 
   const { id } = useParams()
   const navigate = useNavigate()
@@ -28,6 +31,7 @@ export default function BattlestationDetailPage({user, setUser}) {
     }
     getById()    
   }, [])
+
 
   async function handleDelete() {
     await battlestationsAPI.deleteOne(id)
@@ -71,8 +75,8 @@ export default function BattlestationDetailPage({user, setUser}) {
   const medium = useMediaQuery({query: '(min-width: 768px)'})
   const small = useMediaQuery({query: '(min-width: 480px)'})
 
-  const width = largest ? 900 : large ? 850 : medium ? 600 : small ? 500 : 360;
-  const height = largest ? 680 : large ? 643 : medium ? 454 : small ? 378 : 272;
+  const width = largest ? 680 : large ? 850 : medium ? 600 : small ? 500 : 360;
+  const height = largest ? 900 : large ? 643 : medium ? 454 : small ? 378 : 272;
 
   const xScale = useMemo(
     () =>
@@ -98,8 +102,8 @@ export default function BattlestationDetailPage({user, setUser}) {
   return (
     <div className='BattlestationDetailPage'>
       <Container className='detail'>  
-        {/* <img className='image' ref={svgRef} src={battlestation.imageURL} alt="" /> */}
-        <ImageTagger battlestation={battlestation} width={width} height={height} handleUpdateAllItemPositions={handleUpdateAllItemPositions}/>
+        <ImageTagger battlestation={battlestation}setLoaded={setLoaded}width={width} height={height} handleUpdateAllItemPositions={handleUpdateAllItemPositions}/>
+        {loaded && <>
         <ul>
           <BattlestationTable user={user} battlestation={battlestation} handleDeleteItem={handleDeleteItem} handleAddItem={handleAddItem}/>
           <li> Link: <a href={battlestation.redditLink}>Click </a></li>
@@ -116,7 +120,9 @@ export default function BattlestationDetailPage({user, setUser}) {
           </>
           }
         </ul>
+        </>}
       </Container>
+      {loaded && <Footer /> }
     </div>
   )
 }
