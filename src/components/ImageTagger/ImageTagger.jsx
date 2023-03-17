@@ -3,13 +3,15 @@ import './ImageTagger.css'
 import { useState, useEffect, useRef } from "react";
 import { EditableAnnotation, Label, Connector, CircleSubject } from "@visx/annotation";
 
-export default function ImageTagger({ battlestation, handleUpdateAllItemPositions }) {
+export default function ImageTagger({ battlestation, handleUpdateAllItemPositions, setLoaded }) {
 
 
     const [isEditable, setIsEditable] = useState(false)
     const [clickCoordinates, setClickCoordinates] = useState([]);
     const [annotationData, setAnnotationData] = useState([])
     const [unsavedAnnotation, setUnsavedAnnotation] = useState([])
+    const [width, setWidth] = useState(1)
+    const [height, setHeight] = useState(1)
 
     const [newItem, setNewItem] = useState({
         title: '',
@@ -30,27 +32,8 @@ export default function ImageTagger({ battlestation, handleUpdateAllItemPosition
         function getItems() {
             setUnsavedAnnotation(battlestation.items)
         }
-        function setSvgWidthHeight() {
-            const img = imgRef.current
-            const svg = svgRef.current
-            if (img && svg) {
-                svg.setAttribute('width', img.width)
-                svg.setAttribute('height', img.height);
-            }
-        }
         getItems()
-        setSvgWidthHeight()
     }, [battlestation])
-
-    // useEffect(() => {
-    //     const img = imgRef.current
-    //     const svg = svgRef.current
-    //     if (img && svg) {
-    //         svg.setAttribute('width', img.width)
-    //         svg.setAttribute('height', img.height);
-    //     }
-    // },[])
-
 
     function handleSubmit(e) {
         e.preventDefault()
@@ -86,13 +69,59 @@ export default function ImageTagger({ battlestation, handleUpdateAllItemPosition
         return isEditable
     }
 
+    const [originalAspectRatio, setOriginalAspectRatio] = useState(null);
+
+//   useEffect(() => {
+//     const img = new Image();
+//     img.onload = () => {
+//       const aspectRatio = img.naturalWidth / img.naturalHeight;
+//       console.log(`Image aspect ratio: ${aspectRatio}`);
+//       setOriginalAspectRatio(aspectRatio);
+//     };
+//     img.src = battlestation.imageURL;
+//   }, [battlestation]);
+
+
+    function getImageDimension(aspectRatio) {
+        if (Math.abs(aspectRatio - (3 / 4)) < Math.abs(aspectRatio - (4 / 3))) {
+            return {width: 680, height: 900}
+        } else {
+            return {width: 900, height: 680}
+        }
+    }
+
+  //naturalWidth and naturalHeight properties are metadata that are included in the image file 
+  useEffect(() => {
+    const img = new Image()
+    img.src = battlestation.imageURL
+
+    function getDimensions() {
+        const naturalWidth = img.naturalWidth
+        const naturalHeight = img.naturalHeight
+        const aspectRatio = naturalWidth/naturalHeight
+        console.log(aspectRatio)
+        const width = getImageDimension(aspectRatio).width
+        const height = getImageDimension(aspectRatio).height
+        console.log(width, height)
+        setWidth(width)
+        setHeight(height)
+        setLoaded(true)
+    }
+
+    img.addEventListener('load', getDimensions)
+    return () => {
+        img.removeEventListener('load', getDimensions)
+        
+    }
+  },[battlestation])
+
     return (
         <div>
-
+            
             <Cursor svgRef={svgRef} setClickCoordinates={setClickCoordinates} />
             <div>
-                The mouse is at position{' '}
-                <b>({clickCoordinates.x}, {clickCoordinates.y})</b>
+                <span style={{color: 'white'}}> The mouse is at position{' '}</span> 
+                <b style={{color: 'white'}}>({clickCoordinates.x}, {clickCoordinates.y})</b>
                 <div>
                     <label> edit </label>
                     <input type="checkbox" name='edit' onChange={handleCheck} />
@@ -112,22 +141,22 @@ export default function ImageTagger({ battlestation, handleUpdateAllItemPosition
                     </form>
                 </div>
             </div>
+   
 
             <div style={{ position: 'relative' }}>
-                <img
-                    ref={imgRef}
-                    src={battlestation.imageURL}
-                    // style={{ position: 'absolute', width: '45rem', height: '30rem' }}
-                    style={{ position: 'absolute', maxWidth:'100%', height: 'auto' }}
-                />
-                <svg
-                    ref={svgRef}
-                    style={{
-                        position: 'absolute',
-                        left: '0',
-                        top: '0',
-                        // width & height set in useEffect
-                    }}>
+                <svg ref={svgRef}
+                width={width}
+                height={height}
+                // viewBox={`0 0 ${width} ${height}`}
+                >
+                    <image href={battlestation.imageURL} 
+                    // width={width} 
+                    // height={height} 
+                    width="100%" 
+                    height="100%" 
+                    preserveAspectRatio="xMidYMid slice"
+                    />
+
                     {unsavedAnnotation && unsavedAnnotation.map((annotation) => (
                         <EditableAnnotation
                             key={annotation._id}
