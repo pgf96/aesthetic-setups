@@ -11,6 +11,7 @@ import BattlestationDetailPage from '../BattlestationDetailPage/BattlestationDet
 import BattlestationPendingListPage from '../BattlestationPendingListPage/BattlestationPendingListPage';
 import UnauthorizedPage from '../UnauthorizedPage/UnauthorizedPage';
 import ProtectedRoute from '../../components/ProtectedRoute/ProtectedRoute';
+import 'react-tooltip/dist/react-tooltip.css'
 
 export default function App() {
   const [user, setUser] = useState(getUser());
