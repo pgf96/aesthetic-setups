@@ -3,15 +3,15 @@ import './ImageTagger.css'
 import { useState, useEffect, useRef } from "react";
 import { EditableAnnotation, Label, Connector, CircleSubject } from "@visx/annotation";
 
-export default function ImageTagger({ battlestation, handleUpdateAllItemPositions, setLoaded }) {
+export default function ImageTagger({ battlestation, handleUpdateAllItemPositions, setLoaded, xScale, yScale, width, height, isEditable, unsavedAnnotation, setUnsavedAnnotation }) {
 
 
-    const [isEditable, setIsEditable] = useState(false)
+    // const [isEditable, setIsEditable] = useState(false)
     const [clickCoordinates, setClickCoordinates] = useState([]);
     const [annotationData, setAnnotationData] = useState([])
-    const [unsavedAnnotation, setUnsavedAnnotation] = useState([])
-    const [width, setWidth] = useState(1)
-    const [height, setHeight] = useState(1)
+    // const [unsavedAnnotation, setUnsavedAnnotation] = useState([])
+    const [width1, setWidth1] = useState(1)
+    const [height1, setHeight1] = useState(1)
 
     const [newItem, setNewItem] = useState({
         title: '',
@@ -57,17 +57,17 @@ export default function ImageTagger({ battlestation, handleUpdateAllItemPosition
         );
     }
 
-    function handleAnnotationSave(e) {
-        e.preventDefault()
-        handleUpdateAllItemPositions(unsavedAnnotation)
-    }
+    // function handleAnnotationSave(e) {
+    //     e.preventDefault()
+    //     handleUpdateAllItemPositions(unsavedAnnotation)
+    // }
 
 
 
-    function handleCheck() {
-        setIsEditable(!isEditable)
-        return isEditable
-    }
+    // function handleCheck() {
+    //     setIsEditable(!isEditable)
+    //     return isEditable
+    // }
 
     const [originalAspectRatio, setOriginalAspectRatio] = useState(null);
 
@@ -84,9 +84,10 @@ export default function ImageTagger({ battlestation, handleUpdateAllItemPosition
 
     function getImageDimension(aspectRatio) {
         if (Math.abs(aspectRatio - (3 / 4)) < Math.abs(aspectRatio - (4 / 3))) {
-            return {width: 680, height: 900}
+            // 3:4 flip vs 4:3
+            return {width: height, height: width}
         } else {
-            return {width: 900, height: 680}
+            return {width: width, height: height}
         }
     }
 
@@ -103,8 +104,8 @@ export default function ImageTagger({ battlestation, handleUpdateAllItemPosition
         const width = getImageDimension(aspectRatio).width
         const height = getImageDimension(aspectRatio).height
         console.log(width, height)
-        setWidth(width)
-        setHeight(height)
+        setWidth1(width)
+        setHeight1(height)
         setLoaded(true)
     }
 
@@ -113,40 +114,30 @@ export default function ImageTagger({ battlestation, handleUpdateAllItemPosition
         img.removeEventListener('load', getDimensions)
         
     }
-  },[battlestation])
+  },[battlestation, width, height])
 
     return (
         <div>
             
             <Cursor svgRef={svgRef} setClickCoordinates={setClickCoordinates} />
-            <div>
+            {/* <div>
+                <span style={{color: 'white'}}> here is the {xScale(1)} </span> 
+                <br /> 
                 <span style={{color: 'white'}}> The mouse is at position{' '}</span> 
+            
                 <b style={{color: 'white'}}>({clickCoordinates.x}, {clickCoordinates.y})</b>
                 <div>
                     <label> edit </label>
                     <input type="checkbox" name='edit' onChange={handleCheck} />
                     <button onClick={handleAnnotationSave}> click </button>
                 </div>
-                <div>
-                    <form onSubmit={handleSubmit}>
-                        <div>
-                            <input
-                                type="text"
-                                value={newItem.title}
-                                onChange={handleChange}
-                                ref={inputRef}
-                            />
-                            <button type="submit">add to unsaved annotations</button>
-                        </div>
-                    </form>
-                </div>
-            </div>
+            </div> */}
    
 
-            <div style={{ position: 'relative' }}>
+            <div className='main-image'style={{ position: 'relative' }}>
                 <svg ref={svgRef}
-                width={width}
-                height={height}
+                width={width1}
+                height={height1}
                 // viewBox={`0 0 ${width} ${height}`}
                 >
                     <image href={battlestation.imageURL} 
@@ -160,15 +151,23 @@ export default function ImageTagger({ battlestation, handleUpdateAllItemPosition
                     {unsavedAnnotation && unsavedAnnotation.map((annotation) => (
                         <EditableAnnotation
                             key={annotation._id}
-                            x={annotation.x}
-                            y={annotation.y}
-                            dx={annotation.dx}
-                            dy={annotation.dy}
+                            x={xScale(annotation.x)}
+                            y={yScale(annotation.y)}
+                            dx={xScale(annotation.dx)}
+                            dy={yScale(annotation.dy)}
                             width={annotation.width}
                             height={annotation.height}
                             canEditSubject={isEditable}
                             canEditLabel={isEditable}
-                            onDragEnd={(coord) => handleDragEnd(coord, annotation._id,)}>
+                            onDragEnd={({ x, y, dx, dy }) => {
+                                // coordinates are passed as unscaled in order to preserve the original coordinate data
+                                const unscaledX = xScale.invert(x)
+                                const unscaledY = yScale.invert(y)
+                                const unscaledDx = xScale.invert(dx)
+                                const unscaledDy = yScale.invert(dy)
+                                handleDragEnd({ x: unscaledX, y: unscaledY, dx: unscaledDx, dy: unscaledDy }, annotation._id);
+                              }}
+                            >
                             <Connector
                                 stroke={'black'}
                                 type={'elbow'} />
@@ -176,12 +175,14 @@ export default function ImageTagger({ battlestation, handleUpdateAllItemPosition
                                 stroke={'black'}
                                 radius={3} />
                             <Label
-                                title={annotation.name}
+                                maxWidth={xScale(150)}
+                                titleFontSize={xScale(12)}
+                                title={annotation.model}
                                 fontColor={'white'}
                                 showBackground={true}
                                 backgroundFill={'rgba(0, 0, 0, 0.3)'}
                                 anchorLineStroke={'black'}
-                                titleFontSize={'11'}
+                                backgroundPadding={xScale(12)}
                             />
                         </EditableAnnotation>
                     ))}
