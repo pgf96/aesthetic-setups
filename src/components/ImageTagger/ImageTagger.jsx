@@ -1,7 +1,7 @@
 import Cursor from "../Cursor/Cursor";
 import './ImageTagger.css'
 import { useState, useEffect, useRef } from "react";
-import { EditableAnnotation, Label, Connector, CircleSubject } from "@visx/annotation";
+import { EditableAnnotation, Label, Connector, CircleSubject, LineSubject } from "@visx/annotation";
 
 export default function ImageTagger({ battlestation, handleUpdateAllItemPositions, setLoaded, xScale, yScale, width, height, isEditable, unsavedAnnotation, setUnsavedAnnotation }) {
 
@@ -159,6 +159,9 @@ export default function ImageTagger({ battlestation, handleUpdateAllItemPosition
                             height={annotation.height}
                             canEditSubject={isEditable}
                             canEditLabel={isEditable}
+                            subjectDragHandleProps={{style:{stroke: 'rgba(255, 0, 0)'}, r: 15}}
+                            labelDragHandleProps={{style:{stroke: 'rgba(0, 255, 0)'},r: 10}}
+                            
                             onDragEnd={({ x, y, dx, dy }) => {
                                 // coordinates are passed as unscaled in order to preserve the original coordinate data
                                 const unscaledX = xScale.invert(x)
@@ -170,10 +173,17 @@ export default function ImageTagger({ battlestation, handleUpdateAllItemPosition
                             >
                             <Connector
                                 stroke={'black'}
-                                type={'elbow'} />
+                                type={'elbow'} 
+                                pathProps={{strokeWidth: '1.8'}}
+                            
+                                />
+                                
                             <CircleSubject
                                 stroke={'black'}
-                                radius={3} />
+                                radius={3} 
+                                fill={'white'}
+                                />
+                                
                             <Label
                                 maxWidth={xScale(150)}
                                 titleFontSize={xScale(12)}
@@ -182,7 +192,14 @@ export default function ImageTagger({ battlestation, handleUpdateAllItemPosition
                                 showBackground={true}
                                 backgroundFill={'rgba(0, 0, 0, 0.3)'}
                                 anchorLineStroke={'black'}
+                                showAnchorLine={false}
+
                                 backgroundPadding={xScale(12)}
+                                backgroundProps={{rx:10,}}
+                               
+                            />
+                            <LineSubject 
+                                stroke={'green'}
                             />
                         </EditableAnnotation>
                     ))}
