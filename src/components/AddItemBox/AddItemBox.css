@@ -1,0 +1,17 @@
+.submit-button {
+    margin-left: 0px !important;
+    color: white !important;
+    background-color: rgba(0, 255, 30, 0.378) !important ;
+    border-radius: 5px !important;
+    border: none;
+    padding: 0 !important;
+    max-width: 20px !important;
+    align-items: center !important;
+    justify-content: center !important;
+    justify-self: center !important;
+    margin-top: 20px !important;
+}
+
+.submit-button:hover {
+    background-color: rgba(0, 255, 30, 0.378) !important;
+}
