@@ -122,12 +122,15 @@ export default function BattlestationDetailPage({ user }) {
         <ImageTagger battlestation={battlestation} setLoaded={setLoaded} unsavedAnnotation={unsavedAnnotation} setUnsavedAnnotation={setUnsavedAnnotation} isEditable={isEditable} width={width} height={height} xScale={xScale} yScale={yScale} handleUpdateAllItemPositions={handleUpdateAllItemPositions} />
         {loaded && <>
           <div className='display-info'>
-            <span data-tooltip-id='tooltip' data-tooltip-content={`After adding a label, click edit to move the labels. Once you are finished click 'save labels'`}>
-              <BiHelpCircle style={{ color: 'white' }} />
-            </span>
-            <Tooltip
-              id='tooltip'
-            />
+            {/* display tooltip if user is logged in */}
+            {user && 
+            <>
+              <span data-tooltip-id='tooltip' data-tooltip-content={`After adding a label, click edit to move the labels. Once you are finished click 'save labels'`}>
+                <BiHelpCircle style={{ color: 'white' }} />
+              </span>
+              <Tooltip id='tooltip' />
+            </>
+            }
             <BattlestationTable tableWidth={tableWidth} user={user} battlestation={battlestation} handleDeleteItem={handleDeleteItem} handleAddItem={handleAddItem} />
             <ul className='user-info'>
               <li style={{ float: 'left' }}> User: {battlestation.redditUser}</li>
@@ -164,7 +167,7 @@ export default function BattlestationDetailPage({ user }) {
                 )}
 
               </>
-          ):null}
+            ) : null}
           </div>
         </>}
       </Container>
