@@ -16,6 +16,8 @@ export default function HomePageBanner() {
         }
     }, []);
 
+
+
     return (
         <div className='banner'>
             <video ref={videoRef} src={video} autoPlay loop muted
@@ -26,7 +28,8 @@ export default function HomePageBanner() {
                 style={{ opacity: isLoaded ? 1 : 0, 
                 transition: 'opacity 1s ease-in-out' }}>
                 <h1>Aesthetic Setups </h1>
-                <h2>Inspiration taken from the best of r/Battlestations</h2>
+                <h2> <span className='first-word accenuate'>Simplify your search </span> to find the right accessories for your <span className='accenuate'> perfect </span> desk setup</h2>
+                <h2>Inspiration drawn from the best of r/Battlestations </h2>
             </div>
         </div>
 
