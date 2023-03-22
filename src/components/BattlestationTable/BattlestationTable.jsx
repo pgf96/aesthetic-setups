@@ -8,8 +8,12 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import { useState, useEffect } from 'react';
 import AddItemBox from '../AddItemBox/AddItemBox';
+import { Button } from '@mui/material';
+import {MdDeleteForever} from 'react-icons/md'
+import {BiMessageAltAdd} from 'react-icons/bi'
+import './BattlestationTable.css'
 
-export default function BattlestationTable({battlestation, user, handleDeleteItem, handleAddItem}) {
+export default function BattlestationTable({battlestation, user, handleDeleteItem, handleAddItem, tableWidth}) {
 
     const [rows, setRows] = useState([])
     const [revealed, setRevealed] = useState(false)
@@ -66,8 +70,8 @@ export default function BattlestationTable({battlestation, user, handleDeleteIte
     }
 
     return (
-        <TableContainer >
-            <Table sx={{ width: 400 }} aria-label="customized table">
+        <TableContainer sx={{ minHeight: 500}}>
+            <Table sx={{ width: tableWidth }} aria-label="customized table">
                 <TableHead>
                     <TableRow>
                         <StyledTableCell>Item </StyledTableCell>
@@ -83,16 +87,16 @@ export default function BattlestationTable({battlestation, user, handleDeleteIte
                             <StyledTableCell align="right">{row.model}&nbsp;
                             {/* if there is a user and the user is an admin */}
                             {/* {user && user.roles.includes('admin') && <button onClick={() => handleDeleteItem(row._id)}>x&nbsp;</button>} */}
-                            {user && user.roles.includes('admin') && <button onClick={() => handleDeleteRow(row._id)}>x&nbsp;</button>}
+                            {user && user.roles.includes('admin') && <Button className='delete-button' onClick={() => handleDeleteRow(row._id)}>{<MdDeleteForever/>}&nbsp;</Button>}
                             </StyledTableCell>
                         </StyledTableRow>
                     ))}
                 </TableBody>
             </Table>
-            {!user && <button disabled style={{color: 'white'}}> login to add item</button>}
+            {!user && <button disabled style={{color: 'white', borderRadius: '7px', display: 'flex', margin:'0 auto'}}> login to add item</button>}
             {/* if there is a user display the add item button */}
-            {user && <button onClick={toggleAddItemBox}> + </button> }
-            {revealed && <AddItemBox handleAddItem={handleAddItem} />}
+            {user && <Button className='add-button' onClick={toggleAddItemBox}> <BiMessageAltAdd /> </Button> }
+            {revealed && <AddItemBox tableWidth={tableWidth} handleAddItem={handleAddItem} />}
         </TableContainer>
         
     );

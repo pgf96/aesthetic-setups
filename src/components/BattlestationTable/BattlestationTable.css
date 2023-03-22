@@ -1,0 +1,24 @@
+.add-button {
+    margin-left: 15px !important;
+    color: white !important;
+    padding: 0 !important;
+    min-width: 20px !important;
+}
+
+.add-button:hover {
+    background-color: rgba(0, 255, 30, 0.378) !important;
+}
+
+.delete-button {
+    margin-left: 0px !important;
+    color: white !important;
+    padding: 0 !important;
+    min-width: 20px !important;
+}
+.delete-button:hover {
+    background-color: rgba(255, 0, 0, 0.378) !important;
+}
+
+.MuiTableCell-root {
+    font-family: 'Inter', sans-serif !important;
+}
