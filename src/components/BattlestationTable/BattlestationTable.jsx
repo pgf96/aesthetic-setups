@@ -87,7 +87,7 @@ export default function BattlestationTable({battlestation, user, handleDeleteIte
                             <StyledTableCell align="right">{row.model}&nbsp;
                             {/* if there is a user and the user is an admin */}
                             {/* {user && user.roles.includes('admin') && <button onClick={() => handleDeleteItem(row._id)}>x&nbsp;</button>} */}
-                            {user && user.roles.includes('admin') && <Button className='delete-button' onClick={() => handleDeleteRow(row._id)}>{<MdDeleteForever/>}&nbsp;</Button>}
+                            {user && (user.roles.includes('admin')|| user.roles.includes('guest')) && <Button className='delete-button' onClick={() => handleDeleteRow(row._id)}>{<MdDeleteForever/>}&nbsp;</Button>}
                             </StyledTableCell>
                         </StyledTableRow>
                     ))}
