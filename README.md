@@ -25,8 +25,8 @@
 ### Guest account with higher-level permissions
 >  Provides users with restricted access to the site, allowing them to explore select pages and perform certain actions that normally require elevated privileges. However, access to sensitive or restricted areas is restricted to ensure the security and integrity of the site.
 
-### Image Tagger built with D3 and visx
-> Using D3 and Airbnb's visx library, I implemented an image tagger that lets the user add (tags, labels, annotations, etc.,) for images in any format or size. With support for responsive design, the tagger ensures that the text, position, and size of each tag remain properly scaled. The storing and retrieval methods allow each tag to be modified and displayed correctly regardless of the device or viewport used for their creation.
+### Image Labeler built with D3 and visx
+> Using D3 and Airbnb's visx library, I implemented an image labeler that lets the user add (labels, tags, annotations, etc.,) for images in any format or size. With support for responsive design, it ensures that the text, position, and size of each tag remain properly scaled. The storing and retrieval methods allow each tag to be modified and displayed correctly regardless of the device or viewport used for their creation.
 
 
 
@@ -63,6 +63,6 @@ MongoDB, Express, React, NodeJS, D3, Python, Bootstrap, MaterialUI, Cloudinary
 
 - [ ] Allow authors of original content submit a request for the post to be taken down
 
-- [ ] Image tagger to create bounding boxes for ML model
+- [ ] Image labeler tool to create bounding boxes for ML model
 
 - [ ] Train ML model to identify items in pictures
