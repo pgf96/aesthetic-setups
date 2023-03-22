@@ -7,6 +7,8 @@ import UserLogOut from '../UserLogOut/UserLogOut';
 import { Button } from 'react-bootstrap';
 import { useLocation } from 'react-router-dom';
 import { Link } from 'react-router-dom';
+import { Tooltip } from 'react-tooltip'
+import { BiHelpCircle } from 'react-icons/bi'
 
 
 
@@ -32,7 +34,19 @@ export default function NavBar({ user, setUser }) {
           {
             user && user.roles.includes('admin') && (
               <Nav.Link as={Link} to='/pending'>Pending</Nav.Link>
-          )}
+            )}
+          {user && user.roles.includes('guest') && 
+          <>
+            <Nav.Link as={Link} to='/battlestations/63f662e91b6e69d4961170b6'>Example Battlestation </Nav.Link>
+            <span data-tooltip-id='navbar-tooltip-multiline' data-tooltip-html="Welcome! The guest account has limited access, <br /> but I provided an example Battlestation which will <br /> display all features as if you were on an account with full privileges. <br/> <br/> As of right now I am restricting actions on the publicly displayed pages to  <br /> users with site or admin privileges. If you would like to know more or if <br /> you would like to request additional priveleges feel free to contact me. " >
+              <BiHelpCircle style={{ color: 'white' }} /> Hover Me
+            </span>
+            <Tooltip
+              id='navbar-tooltip-multiline'
+              multiline={true}
+            />
+          </>
+          }
         </Nav>
         <Nav>
           <UserLogOut user={user} setUser={setUser} />
