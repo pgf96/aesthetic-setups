@@ -10,7 +10,6 @@
 ![](public/images/aesthetic-preview.png)
 ![](public/images/wireframe2.png)
 
-![](public/images/erd.png)
 
 ## Built with
 MongoDB, Express, React, NodeJS, Python, Bootstrap, MaterialUI, Cloudinary
