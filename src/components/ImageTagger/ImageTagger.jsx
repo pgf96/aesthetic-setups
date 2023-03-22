@@ -3,15 +3,15 @@ import './ImageTagger.css'
 import { useState, useEffect, useRef } from "react";
 import { EditableAnnotation, Label, Connector, CircleSubject, LineSubject } from "@visx/annotation";
 
-export default function ImageTagger({ battlestation, handleUpdateAllItemPositions, setLoaded, xScale, yScale, width, height, isEditable, unsavedAnnotation, setUnsavedAnnotation }) {
+export default function ImageTagger({ battlestation, handleLoaded, xScale, yScale, width, height, isEditable, unsavedAnnotation, setUnsavedAnnotation }) {
 
 
     // const [isEditable, setIsEditable] = useState(false)
     const [clickCoordinates, setClickCoordinates] = useState([]);
     const [annotationData, setAnnotationData] = useState([])
     // const [unsavedAnnotation, setUnsavedAnnotation] = useState([])
-    const [width1, setWidth1] = useState(1)
-    const [height1, setHeight1] = useState(1)
+    const [svgWidth, setSvgWidth] = useState(1)
+    const [svgHeight, setSvgHeight] = useState(1)
 
     const [newItem, setNewItem] = useState({
         title: '',
@@ -23,10 +23,7 @@ export default function ImageTagger({ battlestation, handleUpdateAllItemPosition
         height: 100,
         id: 3
     })
-
-    const inputRef = useRef(null)
     const svgRef = useRef(null)
-    const imgRef = useRef(null)
 
     useEffect(function () {
         function getItems() {
@@ -104,9 +101,9 @@ export default function ImageTagger({ battlestation, handleUpdateAllItemPosition
         const width = getImageDimension(aspectRatio).width
         const height = getImageDimension(aspectRatio).height
         console.log(width, height)
-        setWidth1(width)
-        setHeight1(height)
-        setLoaded(true)
+        setSvgWidth(width)
+        setSvgHeight(height)
+        handleLoaded()
     }
 
     img.addEventListener('load', getDimensions)
@@ -114,7 +111,7 @@ export default function ImageTagger({ battlestation, handleUpdateAllItemPosition
         img.removeEventListener('load', getDimensions)
         
     }
-  },[battlestation, width, height])
+  },[battlestation.imageURL, width, height])
 
     return (
         <div>
@@ -136,8 +133,8 @@ export default function ImageTagger({ battlestation, handleUpdateAllItemPosition
 
             <div className='main-image'style={{ position: 'relative' }}>
                 <svg ref={svgRef}
-                width={width1}
-                height={height1}
+                width={svgWidth}
+                height={svgHeight}
                 // viewBox={`0 0 ${width} ${height}`}
                 >
                     <image href={battlestation.imageURL} 
