@@ -25,7 +25,7 @@ Users can draw inspiration for their own desk setups and be able to easily ident
 
 
 <img src="public/images/detail_page.png" alt="image description" width="75%" height="75%"/>
-<img src="public/images/detail_page_mobile.png" alt="image description" width="55%" height="55%"/>
+<img src="public/images/detail_page_mobile.png" alt="image description" width="35%" height="35%"/>
 
 
 
@@ -42,12 +42,16 @@ MongoDB, Express, React, NodeJS, D3, Python, Bootstrap, MaterialUI, Cloudinary
 
 - [x] create guest account 
 
-- [ ] Refactor tokens to be stored in cookies ( localstorage -> cookie)
-
 - [x] Add media hosting service
 
 - [x] Add tags to picture that are linked to items in a table
 
 - [x] Design for mobile
+
+- [ ] Refactor tokens to be stored in cookies ( localstorage -> cookie)
+
+- [ ] Allow authors of original content submit a request for the post to be taken down
+
+- [ ] Image tagger to create bounding boxes for ML model
 
 - [ ] Train ML model to identify items in pictures
