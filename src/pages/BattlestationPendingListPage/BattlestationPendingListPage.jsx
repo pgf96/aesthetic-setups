@@ -15,7 +15,8 @@ export default function BattlestationPendingListPage() {
     },[])
 
   return (
-    <div>
+    <div style={{ margin: '9rem 0 0 0'}}>
+        
         <BattlestationList battlestations={pendingList} />
     </div>
   )
