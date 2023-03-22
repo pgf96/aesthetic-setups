@@ -5,7 +5,7 @@
 </p>
 
 ## Description
- Application that allows users to easily identify and save items in posts from r/battlestations. The app streamlines the process of finding specific items in the comments section of a post, making it easier for users to discover and purchase the products they're interested in. With Aesthetic Setups, users can submit posts from r/battlestations and tag specific items, saving them to a database for easy reference.
+ Application that allows users to easily identify items in posts from r/battlestations. The app streamlines the process of finding specific items in the comments section of a post, making it easier for users to discover and find the items they're interested in. With Aesthetic Setups, users can submit posts from r/battlestations and tag specific items, saving them to a database for easy reference.
 
 ## Features
 ### Custom Middleware to check user privileges
