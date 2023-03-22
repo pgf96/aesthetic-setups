@@ -162,7 +162,7 @@ export default function BattlestationDetailPage({ user }) {
                   )}
                 </div>
                 {user.roles.includes('admin') && (
-                  <button className='button-control' onClick={handleDelete}> Delete </button>
+                  <button style={{margin: '10px 0 0 100px'}}className='button-control' onClick={handleDelete}> Delete </button>
                 )}
 
                 {battlestation.approved === !true && user.roles.includes('admin') && (
