@@ -2,7 +2,7 @@
 
 import './BattlestationDetailPage.css'
 import { useParams } from "react-router-dom"
-import { useEffect, useState } from "react"
+import { useCallback, useEffect, useState } from "react"
 import { useNavigate } from 'react-router-dom'
 import * as battlestationsAPI from '../../utilities/battlestations-api'
 import * as itemsAPI from '../../utilities/items-api'
@@ -29,6 +29,10 @@ export default function BattlestationDetailPage({ user }) {
 
   const { id } = useParams()
   const navigate = useNavigate()
+
+  const handleLoaded = useCallback(()=> {
+    setLoaded(true)
+  },[])
 
   useEffect(function () {
     async function getById() {
@@ -119,7 +123,7 @@ export default function BattlestationDetailPage({ user }) {
   return (
     <div className='BattlestationDetailPage'>
       <Container className='detail'>
-        <ImageTagger battlestation={battlestation} setLoaded={setLoaded} unsavedAnnotation={unsavedAnnotation} setUnsavedAnnotation={setUnsavedAnnotation} isEditable={isEditable} width={width} height={height} xScale={xScale} yScale={yScale} handleUpdateAllItemPositions={handleUpdateAllItemPositions} />
+        <ImageTagger battlestation={battlestation} handleLoaded={handleLoaded}unsavedAnnotation={unsavedAnnotation} setUnsavedAnnotation={setUnsavedAnnotation} isEditable={isEditable} width={width} height={height} xScale={xScale} yScale={yScale} handleUpdateAllItemPositions={handleUpdateAllItemPositions} />
         {loaded && <>
           <div className='display-info'>
             {/* display tooltip if user is logged in */}

@@ -1,6 +1,7 @@
-import { Outlet, useNavigate, Navigate} from 'react-router-dom'
+import { Outlet} from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
+import { Navigate } from 'react-router-dom'
 import {getRoles} from '../../utilities/users-service'
-import { useEffect } from 'react'
 
 export default function ProtectedRoute({ user, requiredRoles }) {
     const navigate = useNavigate()

@@ -1,10 +1,7 @@
 import { useState } from "react"
-import * as battlestationsAPI from '../../utilities/battlestations-api'
 import './NewBattlestationForm.css'
-import { useNavigate } from "react-router-dom"
 
 export default function NewBattlestationForm({handleAddNewBattlestation}) {
-    const navigate = useNavigate()
     const [formData, setFormData] = useState({
         redditLink: '',
         redditUser: '',
