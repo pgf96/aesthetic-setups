@@ -9,6 +9,7 @@
 
 
 <img src="public/images/aesthetic-preview.png" alt="image description" width="75%" height="75%/>
+                                                                                           ok
 ![](public/images/aesthetic-preview.png){:height="50%" width="50%"}
 ![](public/images/detail_page.png)
 ![](public/images/wireframe2.png)
