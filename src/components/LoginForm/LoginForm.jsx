@@ -41,6 +41,19 @@ export default function LoginForm({showLogin ,setShowLogin, setUser}) {
     setShowLogin(!showLogin)
   }
 
+  async function loginAsGuest() {
+    try {
+      const user = await usersService.login({
+        email: 'guest@guest.com',
+        password: 'guestpassword'
+      })
+      setUser(user)
+      navigate('/')
+    } catch {
+      setError('Log In Failed - Try Again');
+    }
+  }
+
   return (
 
       <Grid className='LoginForm' container component="main" sx={{ height: '100vh' }}>
@@ -114,6 +127,11 @@ export default function LoginForm({showLogin ,setShowLogin, setUser}) {
                 <Grid item >
                 <Link variant="body1" onClick={handleToggle}>
                     Sign Up
+                  </Link>
+                  <br />
+                  
+                  <Link variant="body1" onClick={loginAsGuest}>
+                    Continue as guest
                   </Link>
                 </Grid>
               </Grid>
