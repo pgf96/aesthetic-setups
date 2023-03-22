@@ -7,9 +7,9 @@ export default function Footer() {
         <Container fluid className='footer-container'>
             <footer className="footer-bs">
                 <div className="row">
-                    <div class="col-md-2 footer-brand animated fadeInLeft">
+                    {/* <div class="col-md-2 footer-brand animated fadeInLeft">
                         <img className='logo-footer' src='https://res.cloudinary.com/db6jsod0y/image/upload/v1676591418/The_world_studios-removebg-preview_p1rfcf.png'></img>
-                    </div>
+                    </div> */}
                     <div class="col-md-5 footer-social animated fadeInDown">
                         <h4>Contact Me</h4>
                         <ul>
