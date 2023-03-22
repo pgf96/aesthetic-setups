@@ -22,14 +22,14 @@ MongoDB, Express, React, NodeJS, Python, Bootstrap, MaterialUI, Cloudinary
 
 - [x] Add user permissions
 
-- [ ] create guest account 
+- [x] create guest account 
 
 - [ ] Refactor tokens to be stored in cookies ( localstorage -> cookie)
 
 - [x] Add media hosting service
 
-- [ ] Add tags to picture that are linked to items in a table
+- [x] Add tags to picture that are linked to items in a table
 
-- [ ] Design for mobile
+- [x] Design for mobile
 
 - [ ] Train ML model to identify items in pictures
