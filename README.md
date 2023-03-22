@@ -7,7 +7,12 @@
 
 > Using The Python Reddit API Wrapper(https://praw.readthedocs.io/en/stable/), a script scrapes the data of the subreddit r/battlestations
 
-![](public/images/aesthetic-preview.png)
+
+<img src="public/images/aesthetic-preview.png" alt="image description" width="75%" height="75%"/>
+<img src="public/images/detail_page.png" alt="image description" width="75%" height="75%"/>
+                                                                                           
+![](public/images/aesthetic-preview.png){:height="50%" width="50%"}
+![](public/images/detail_page.png)
 ![](public/images/wireframe2.png)
 
 
