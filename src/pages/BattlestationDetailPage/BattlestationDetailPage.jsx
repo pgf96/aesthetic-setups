@@ -129,10 +129,10 @@ export default function BattlestationDetailPage({ user }) {
             {/* display tooltip if user is logged in */}
             {user && 
             <>
-              <span data-tooltip-id='tooltip' data-tooltip-content={`After adding a label, click edit to move the labels. Once you are finished click 'save labels'`}>
+              <span  data-tooltip-id='tooltip' data-tooltip-html={`After adding a label, click the edit button at the bottom of the table. <br /> Drag and drop the handles to reposition the label. <br/> Once you are finished click 'save labels. <br /> ***adding a label before saving the positions will cause <br /> all unsaved labels to be reverted back to their original position***`}>
                 <BiHelpCircle style={{ color: 'white' }} />
               </span>
-              <Tooltip id='tooltip' />
+              <Tooltip place='down' id='tooltip' />
             </>
             }
             <BattlestationTable tableWidth={tableWidth} user={user} battlestation={battlestation} handleDeleteItem={handleDeleteItem} handleAddItem={handleAddItem} />
@@ -142,7 +142,10 @@ export default function BattlestationDetailPage({ user }) {
             </ul>
 
             {battlestation.approved ?
-              "" : <li style={{ color: 'red' }}> "not approved"</li>}
+              "" : <li style={{ color: 'red' }}> "not approved"               <span data-tooltip-id='tooltip-pending' data-tooltip-html={'Posts are added to a pending list upon submission. <br/> Users with privileges approve or deny posts via <br/> the "/pending" route. The approved posts are publicly <br/> displayed with others.'}>
+              <BiHelpCircle style={{ color: 'white' }} />
+            </span>
+            <Tooltip  id='tooltip-pending' /></li>}
             {/* display approval button if not - refactor to check serverside roles instead of client side*/}
             {/* if id is the guest example id */}
             {(user && user.roles.includes('admin')) || battlestation._id === '63f662e91b6e69d4961170b6' ? (
