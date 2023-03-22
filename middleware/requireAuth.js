@@ -16,8 +16,18 @@ function requireUser(req, res, next) {
     }
 }
 
+function requireAdminOrGuest(req,res,next) {
+    const user = req.user
+    if ((user && user.roles.includes('admin')) || (user && user.roles.includes('guest'))) {
+        return next()
+    } else {
+        return res.status(401).json({message: 'unauthorized access'})
+    }
+}
+
 
 module.exports = {
     requireAdmin, 
     requireUser,
+    requireAdminOrGuest
 }
