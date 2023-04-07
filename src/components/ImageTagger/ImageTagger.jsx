@@ -97,10 +97,10 @@ export default function ImageTagger({ battlestation, handleLoaded, xScale, yScal
         const naturalWidth = img.naturalWidth
         const naturalHeight = img.naturalHeight
         const aspectRatio = naturalWidth/naturalHeight
-        console.log(aspectRatio)
+        // console.log(aspectRatio)
         const width = getImageDimension(aspectRatio).width
         const height = getImageDimension(aspectRatio).height
-        console.log(width, height)
+        // console.log(width, height)
         setSvgWidth(width)
         setSvgHeight(height)
         handleLoaded()

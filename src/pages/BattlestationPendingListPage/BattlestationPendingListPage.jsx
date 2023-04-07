@@ -8,7 +8,7 @@ export default function BattlestationPendingListPage() {
     useEffect(function() {
         async function getAllPendingBattlestations() {
             const pendingList = await battlestationsAPI.getAllPending()
-            console.log(pendingList)
+            // console.log(pendingList)
             setPendingList(pendingList)
         }
         getAllPendingBattlestations()

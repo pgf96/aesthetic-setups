@@ -7,7 +7,7 @@ export default function ProtectedRoute({ user, requiredRoles }) {
     const navigate = useNavigate()
     const roles = getRoles()
     const hasPermission = roles.some(role => requiredRoles.includes(role))
-    console.log(hasPermission)
+    // console.log(hasPermission)
 
   return (
     hasPermission ? <Outlet /> : <Navigate to='/unauthorized'/> 

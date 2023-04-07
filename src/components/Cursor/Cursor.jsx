@@ -7,10 +7,10 @@ export default function Cursor({setClickCoordinates, inputRef, svgRef}) {
         //     return;
         //   }
         if (!svgRef.current.contains(e.target)) {
-            console.log('click outside')
+            // console.log('click outside')
             return
         } else {
-            console.log('click inside')
+            // console.log('click inside')
             const imageRect = svgRef.current.getBoundingClientRect();
             setClickCoordinates((prevState) => ({
             ...prevState, 

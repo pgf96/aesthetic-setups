@@ -3,7 +3,7 @@ import { ImageListItem } from "@mui/material"
 export default function BattlestationC({battlestation}) {
 
   function handleOnClick() {
-    console.log('wuuuuuuuuut')
+    // console.log('wuuuuuuuuut')
   }
 
   return (

@@ -74,7 +74,7 @@ export default function BattlestationDetailPage({ user }) {
 
   async function handleUpdateAllItemPositions(itemPositions) {
     const updatedItems = await itemsAPI.updateAllItemPositions(id, itemPositions)
-    console.log(updatedItems)
+    // console.log(updatedItems)
     setBattlestation(prevData => ({ ...prevData, items: updatedItems.items }))
   }
 
