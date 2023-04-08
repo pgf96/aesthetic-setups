@@ -1,7 +1,7 @@
 const Battlestation = require('../../models/battlestation')
 
 async function index(req,res) {
-    const battlestations = await Battlestation.find({approved: true})
+    const battlestations = await Battlestation.find({approved: true}).select('redditUser imageURL approved')
     res.json(battlestations)
 }
 
