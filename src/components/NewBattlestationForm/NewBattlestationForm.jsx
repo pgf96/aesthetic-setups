@@ -31,10 +31,10 @@ export default function NewBattlestationForm({handleAddNewBattlestation}) {
             <br />
             <br />
             <label>Link to Reddit Post:</label>
-            <input type="text" name="redditLink" value={formData.redditLink} onChange={handleChange} required />
+            <input type="url" name="redditLink" value={formData.redditLink} onChange={handleChange} required />
             
             <label>Image URL:</label>
-            <input type="text" name="imageURL" value={formData.imageURL} onChange={handleChange} required />
+            <input type="url" name="imageURL" value={formData.imageURL} onChange={handleChange} required />
 
             <label>Reddit Username:</label>
             <input type="text" name="redditUser" value={formData.redditUser} onChange={handleChange} required />
