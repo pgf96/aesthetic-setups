@@ -36,6 +36,7 @@ export default function NavBar({ user, setUser }) {
           {user && user.roles.includes('guest') && 
           <>
             <Nav.Link as={Link} to='/battlestations/63f662e91b6e69d4961170b6'>Example Battlestation </Nav.Link>
+            <Navbar.Text>
             <span data-tooltip-id='navbar-tooltip-multiline' data-tooltip-html="Welcome! The guest account has limited access  but I provided an example <br />Battlestation which will  display all features as if you were on an account <br /> with full privileges. <br/> <br/> As of now, only users with site or admin privileges can perform actions on the <br/> publicly displayed pages. If you want more information or request <br/> additional privileges, please feel free to contact us. " >
               <BiHelpCircle style={{ color: 'white' }} /> <span style={{ color: 'red'}}> <strong style={{color: 'red'}}> Hover Me</strong> </span> 
             </span>
@@ -43,6 +44,8 @@ export default function NavBar({ user, setUser }) {
               id='navbar-tooltip-multiline'
               multiline={true}
             />
+
+            </Navbar.Text>
           </>
           }
         </Nav>
