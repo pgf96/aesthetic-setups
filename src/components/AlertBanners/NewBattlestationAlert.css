@@ -1,0 +1,8 @@
+.NewBattlestationAlert {
+    position: relative;
+    top: 100px;
+    padding: 1rem 0 ;
+    width: 100vw;
+    background-color: rgb(225, 58, 58);
+    text-align: center;
+}
