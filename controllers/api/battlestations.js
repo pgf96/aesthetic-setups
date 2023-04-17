@@ -19,7 +19,7 @@ async function approvePending(req,res) {
 
 
 async function show(req,res) {
-    const battlestation = await Battlestation.findById(req.params.id).select('-approved -items.user')
+    const battlestation = await Battlestation.findById(req.params.id).select('approved -items.user')
     res.json(battlestation)
 }
 
