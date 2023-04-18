@@ -3,6 +3,7 @@ const Battlestation = require('../../models/battlestation')
 async function index(req,res) {
     const battlestations = await Battlestation.find({approved: true}).select('redditUser imageURL approved')
     res.json(battlestations)
+    
 }
 
 async function indexPending(req,res) {
@@ -19,6 +20,7 @@ async function approvePending(req,res) {
 
 
 async function show(req,res) {
+    // remove user info
     const battlestation = await Battlestation.findById(req.params.id).select('-items.user')
     res.json(battlestation)
 }
