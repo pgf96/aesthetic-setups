@@ -22,3 +22,14 @@
 .MuiTableCell-root {
     font-family: 'Inter', sans-serif !important;
 }
+
+.thetable {
+    /* background-color: rgb(35, 41, 50); */
+    /* border: 5px solid red; */
+}
+
+
+.item-table-container {
+    background: rgba(19, 25, 36, 0.516);
+
+}

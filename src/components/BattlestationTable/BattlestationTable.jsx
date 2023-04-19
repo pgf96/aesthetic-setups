@@ -21,11 +21,12 @@ export default function BattlestationTable({ battlestation, user, handleDeleteIt
 
     const StyledTableCell = styled(TableCell)(({ theme }) => ({
         [`&.${tableCellClasses.head}`]: {
-            // backgroundColor: 'gray',
-            // table header text color
+            backgroundColor: 'rgb(27,36,54)',
             color: 'white',
+            borderBottom: '1px solid red'
         },
         [`&.${tableCellClasses.body}`]: {
+            borderBottom: '3px solid rgb(56,66,84)',
             color: 'white',
             fontSize: 14,
         },
@@ -33,26 +34,20 @@ export default function BattlestationTable({ battlestation, user, handleDeleteIt
 
     const StyledTableRow = styled(TableRow)(({ theme }) => ({
         '&:nth-of-type(odd)': {
-            // backgroundColor: 'gray',
             color: 'white',
-            // border: 0,
         },
         '&:nth-of-type(even)': {
-            // backgroundColor: 'gray',
-            border: 0,
-            // color: 'white',
+            color: 'red',
         },
         // hide last border
         '&:last-child td, &:last-child th': {
             border: 0,
-            // backgroundColor: 'gray'
         },
     }));
 
     function createData(name, model) {
         return { name, model };
     }
-
 
     useEffect(() => {
         if (battlestation && battlestation.items) {
@@ -79,13 +74,33 @@ export default function BattlestationTable({ battlestation, user, handleDeleteIt
 
 
     return (
-        <TableContainer sx={{ minHeight: 500 }}>
-            <Table className='thetable' sx={{ width: tableWidth}} aria-label="customized table">
+        <TableContainer className='item-table-container' 
+            sx={{ 
+                border: '5px solid rgba(41, 49, 58, 0.64)', 
+                borderRadius: 4,
+                minHeight: 500,
+
+            }}
+            >
+            <Table className='thetable' sx={{ 
+                width: tableWidth
+                }}>
                 <TableHead>
                     <TableRow>
                         {/* the column without a defined width is given the remainder of the table width */}
-                        <StyledTableCell style={{fontWeight: 700, width: itemColumnWidth, fontSize: '1rem'}}>Item </StyledTableCell>
-                        <StyledTableCell style={{fontWeight: 700,  fontSize: '1rem'}}align="right">Model&nbsp;</StyledTableCell>
+                        <StyledTableCell
+                            style={{
+                                width: itemColumnWidth,
+                                fontSize: '1rem',
+                            }}>
+                            Item
+                        </StyledTableCell>
+                        <StyledTableCell
+                            style={{
+                                fontSize: '1rem',
+                            }}
+                            align="right">
+                            Model&nbsp;</StyledTableCell>
                     </TableRow>
                 </TableHead>
                 <TableBody>
