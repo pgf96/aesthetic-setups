@@ -4,8 +4,22 @@
 }
 
 .MuiInputBase-root {
+    font-family: Inter !important;
+    font-weight: 300 !important;
     color: white !important;
 }
 .MuiFormLabel-root {
+    font-family: Inter !important;
+    font-weight: 300 !important;
     color: white !important;
+}
+
+.MuiTypography-root {
+    font-family: Inter !important;
+    font-weight: 300 !important;
+}
+
+.MuiTouchRipple-root {
+    font-family: Inter !important;
+    font-weight: 300 !important;
 }
