@@ -1,26 +1,18 @@
 .container.detail {
     display: grid;
-    grid-template-columns: 1.4fr .6fr;
+    grid-template-columns: auto auto;
     grid-template-rows: auto auto;
     justify-content: center;
-    grid-column-gap: 2rem;
+    grid-column-gap: .5rem;
     background-color: rgb(11, 17, 27);
     margin-top: 12rem;
     padding-bottom: 150px;
-    width: auto;
-}
-
-.BattlestationDetailPage {
-    /* margin-left: 1rem; */
-    /* margin-right: .5rem;  */
-
 }
 
 .display-info {
     width: max-content;
     flex-direction: column;
     justify-self: center;
-    /* justify-content: center; */
     align-items: center;
     padding-left: 0;
 }
@@ -35,7 +27,6 @@ ul.user-info {
 .BattlestationDetailPage ul {
     flex-direction: column;
     justify-self: center;
-    /* justify-content: center; */
     align-items: center;
     padding-left: 0;
 }
@@ -47,7 +38,6 @@ ul.user-info {
 }
 
 .image {
-    /* flex-direction: column; */
     justify-self: center;
     align-items: center;
     max-width: 1000px;
@@ -64,5 +54,4 @@ ul.user-info {
     .container.detail {
         grid-template-columns: 100%;
     }
-    
 }
