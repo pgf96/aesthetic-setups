@@ -44,8 +44,10 @@ video {
 
 .content>h1 {
     /* font-size: 12vh; */
-    letter-spacing: 22px;
-    font-size: 5.0vw;
+    /* letter-spacing: 22px; */
+    /* font-size: 5.0vw; */
+    font-size: 148px;
+    font-weight: 100;
     color: rgb(234, 234, 234);
     text-shadow: 3px 3px 5px #b4b4b4;
     /* margin: 10px */
@@ -53,6 +55,7 @@ video {
 
 .content>h2 {
     font-size: 1.1vw;
+    font-weight: 200;
     letter-spacing: 3px;
     color: white;
 }
