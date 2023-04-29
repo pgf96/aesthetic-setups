@@ -3,7 +3,7 @@ import './ImageTagger.css'
 import { useState, useEffect, useRef } from "react";
 import { EditableAnnotation, Label, Connector, CircleSubject, LineSubject } from "@visx/annotation";
 
-export default function ImageTagger({ battlestation, handleLoaded, xScale, yScale, width, height, isEditable, unsavedAnnotation, setUnsavedAnnotation }) {
+export default function ImageTagger({ battlestation, handleLoaded, xScale, yScale, width, height, isEditable, unsavedAnnotation, setUnsavedAnnotation, setIsPortrait }) {
 
 
     // const [isEditable, setIsEditable] = useState(false)
@@ -68,54 +68,58 @@ export default function ImageTagger({ battlestation, handleLoaded, xScale, yScal
 
     const [originalAspectRatio, setOriginalAspectRatio] = useState(null);
 
-//   useEffect(() => {
-//     const img = new Image();
-//     img.onload = () => {
-//       const aspectRatio = img.naturalWidth / img.naturalHeight;
-//       console.log(`Image aspect ratio: ${aspectRatio}`);
-//       setOriginalAspectRatio(aspectRatio);
-//     };
-//     img.src = battlestation.imageURL;
-//   }, [battlestation]);
+    //   useEffect(() => {
+    //     const img = new Image();
+    //     img.onload = () => {
+    //       const aspectRatio = img.naturalWidth / img.naturalHeight;
+    //       console.log(`Image aspect ratio: ${aspectRatio}`);
+    //       setOriginalAspectRatio(aspectRatio);
+    //     };
+    //     img.src = battlestation.imageURL;
+    //   }, [battlestation]);
 
 
     function getImageDimension(aspectRatio) {
         if (Math.abs(aspectRatio - (3 / 4)) < Math.abs(aspectRatio - (4 / 3))) {
             // 3:4 flip vs 4:3
-            return {width: height, height: width}
+            setIsPortrait(true)
+            return { width: height, height: width }
         } else {
-            return {width: width, height: height}
+            setIsPortrait(true)
+            return { width: width, height: height }
         }
     }
 
-  //naturalWidth and naturalHeight properties are metadata that are included in the image file 
-  useEffect(() => {
-    const img = new Image()
-    img.src = battlestation.imageURL
+    // naturalWidth and naturalHeight properties are metadata that are included in the image file 
+    // once image contents are loaded (NOT RENDERED) then set the correct aspect ratio 
+    // render image with correct dimensions
 
-    function getDimensions() {
-        const naturalWidth = img.naturalWidth
-        const naturalHeight = img.naturalHeight
-        const aspectRatio = naturalWidth/naturalHeight
-        // console.log(aspectRatio)
-        const width = getImageDimension(aspectRatio).width
-        const height = getImageDimension(aspectRatio).height
-        // console.log(width, height)
-        setSvgWidth(width)
-        setSvgHeight(height)
-        handleLoaded()
-    }
+    useEffect(() => {
+        const img = new Image()
+        img.src = battlestation.imageURL
 
-    img.addEventListener('load', getDimensions)
-    return () => {
-        img.removeEventListener('load', getDimensions)
-        
-    }
-  },[battlestation.imageURL, width, height])
+        function getDimensions() {
+            const naturalWidth = img.naturalWidth
+            const naturalHeight = img.naturalHeight
+            const aspectRatio = naturalWidth / naturalHeight
+            const width = getImageDimension(aspectRatio).width
+            const height = getImageDimension(aspectRatio).height
+            setSvgWidth(width)
+            setSvgHeight(height)
+            handleLoaded()
+        }
+
+        // once image is loaded grab dimensions
+        img.addEventListener('load', getDimensions)
+        return () => {
+            img.removeEventListener('load', getDimensions)
+
+        }
+    }, [battlestation.imageURL, width, height])
 
     return (
-        <div>
-            
+        <div className="svg-cursor-image-container">
+
             <Cursor svgRef={svgRef} setClickCoordinates={setClickCoordinates} />
             {/* <div>
                 <span style={{color: 'white'}}> here is the {xScale(1)} </span> 
@@ -129,20 +133,22 @@ export default function ImageTagger({ battlestation, handleLoaded, xScale, yScal
                     <button onClick={handleAnnotationSave}> click </button>
                 </div>
             </div> */}
-   
 
-            <div className='main-image'style={{ position: 'relative' }}>
-                <svg ref={svgRef}
-                width={svgWidth}
-                height={svgHeight}
+
+            <div className='main-image' style={{ position: 'relative' }}>
+                <svg 
+                    style={{borderRadius: 10}}
+                    ref={svgRef}
+                    width={svgWidth}
+                    height={svgHeight}
                 // viewBox={`0 0 ${width} ${height}`}
                 >
-                    <image href={battlestation.imageURL} 
-                    // width={width} 
-                    // height={height} 
-                    width="100%" 
-                    height="100%" 
-                    preserveAspectRatio="xMidYMid slice"
+                    <image href={battlestation.imageURL}
+                        // width={width} 
+                        // height={height} 
+                        width="100%"
+                        height="100%"
+                        preserveAspectRatio="xMidYMid slice"
                     />
 
                     {unsavedAnnotation && unsavedAnnotation.map((annotation) => (
@@ -156,9 +162,9 @@ export default function ImageTagger({ battlestation, handleLoaded, xScale, yScal
                             height={annotation.height}
                             canEditSubject={isEditable}
                             canEditLabel={isEditable}
-                            subjectDragHandleProps={{style:{stroke: 'rgba(255, 0, 0)'}, r: 15}}
-                            labelDragHandleProps={{style:{stroke: 'rgba(0, 255, 0)'},r: 10}}
-                            
+                            subjectDragHandleProps={{ style: { stroke: 'rgba(255, 0, 0)' }, r: 15 }}
+                            labelDragHandleProps={{ style: { stroke: 'rgba(0, 255, 0)' }, r: 10 }}
+
                             onDragEnd={({ x, y, dx, dy }) => {
                                 // coordinates are passed as unscaled in order to preserve the original coordinate data
                                 const unscaledX = xScale.invert(x)
@@ -166,21 +172,21 @@ export default function ImageTagger({ battlestation, handleLoaded, xScale, yScal
                                 const unscaledDx = xScale.invert(dx)
                                 const unscaledDy = yScale.invert(dy)
                                 handleDragEnd({ x: unscaledX, y: unscaledY, dx: unscaledDx, dy: unscaledDy }, annotation._id);
-                              }}
-                            >
+                            }}
+                        >
                             <Connector
                                 stroke={'black'}
-                                type={'elbow'} 
-                                pathProps={{strokeWidth: '1.8'}}
-                            
-                                />
-                                
+                                type={'elbow'}
+                                pathProps={{ strokeWidth: '1.8' }}
+
+                            />
+
                             <CircleSubject
                                 stroke={'black'}
-                                radius={3} 
+                                radius={3}
                                 fill={'white'}
-                                />
-                                
+                            />
+
                             <Label
                                 maxWidth={xScale(150)}
                                 titleFontSize={xScale(12)}
@@ -192,10 +198,10 @@ export default function ImageTagger({ battlestation, handleLoaded, xScale, yScal
                                 showAnchorLine={false}
 
                                 backgroundPadding={xScale(12)}
-                                backgroundProps={{rx:10,}}
-                               
+                                backgroundProps={{ rx: 10, }}
+
                             />
-                            <LineSubject 
+                            <LineSubject
                                 stroke={'green'}
                             />
                         </EditableAnnotation>
