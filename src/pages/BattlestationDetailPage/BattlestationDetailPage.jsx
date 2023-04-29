@@ -26,6 +26,7 @@ export default function BattlestationDetailPage({ user }) {
   const [isEditable, setIsEditable] = useState(false)
   const [isSaved, setIsSaved] = useState(false)
   const [unsavedAnnotation, setUnsavedAnnotation] = useState([])
+  const [isPortrait, setIsPortrait] = useState('')
 
   const { id } = useParams()
   const navigate = useNavigate()
@@ -94,10 +95,11 @@ export default function BattlestationDetailPage({ user }) {
   const medium = useMediaQuery({ query: '(min-width: 768px)' })
   const small = useMediaQuery({ query: '(min-width: 480px)' })
 
-  const width = largest ? 900 : large ? 850 : medium ? 600 : small ? 500 : 500;
-  const height = largest ? 675 : large ? 637 : medium ? 450 : small ? 375 : 375;
+  const width = largest ? 900 : large ? 850 : medium ? 600 : small ? 500 : 416;
+  const height = largest ? 675 : large ? 637 : medium ? 450 : small ? 375 : 312;
 
-  const tableWidth = largest ? 450 : large ? 450 : medium ? 450 : small ? 375 : 345;
+  const customBreakPoint = useMediaQuery({ query: '(min-width: 1224px)' })
+  const tableWidth = largest ? 450 : large ? 600 : medium ? 450 : small ? 375 : 345;
 
   const xScale = useMemo(
     () =>
@@ -118,23 +120,25 @@ export default function BattlestationDetailPage({ user }) {
   );
 
 
+  
 
 
   return (
     <div className='BattlestationDetailPage'>
+      {/* <Container className='detail' style={{gridTemplateColumns: isPortrait ? '.6fr .6fr' : '1.4fr .6fr'}}> */}
       <Container className='detail'>
-        <ImageTagger battlestation={battlestation} handleLoaded={handleLoaded}unsavedAnnotation={unsavedAnnotation} setUnsavedAnnotation={setUnsavedAnnotation} isEditable={isEditable} width={width} height={height} xScale={xScale} yScale={yScale} handleUpdateAllItemPositions={handleUpdateAllItemPositions} />
+        <ImageTagger battlestation={battlestation} setIsPortrait={setIsPortrait} handleLoaded={handleLoaded}unsavedAnnotation={unsavedAnnotation} setUnsavedAnnotation={setUnsavedAnnotation} isEditable={isEditable} width={width} height={height} xScale={xScale} yScale={yScale} handleUpdateAllItemPositions={handleUpdateAllItemPositions} />
         {loaded && <>
           <div className='display-info'>
             {/* display tooltip if user is logged in */}
-            {user && 
+            {/* {user && 
             <>
               <span  data-tooltip-id='tooltip' data-tooltip-html={`After adding a label, click the edit button at the bottom of the table. <br /> Drag and drop the handles to reposition the label. <br/> Once you are finished click 'save labels. <br /> ***adding a label before saving the positions will cause <br /> all unsaved labels to be reverted back to their original position***`}>
                 <BiHelpCircle style={{ color: 'white' }} />
               </span>
               <Tooltip place='down' id='tooltip' />
             </>
-            }
+            } */}
             <BattlestationTable tableWidth={tableWidth} user={user} battlestation={battlestation} handleDeleteItem={handleDeleteItem} handleAddItem={handleAddItem} />
             <ul className='user-info'>
               <li style={{ float: 'left' }}> User: {battlestation.redditUser}</li>

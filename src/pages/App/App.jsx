@@ -15,7 +15,6 @@ import 'react-tooltip/dist/react-tooltip.css'
 
 export default function App() {
   const [user, setUser] = useState(getUser());
-
   return (
 
     <main className='main'>
