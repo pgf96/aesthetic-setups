@@ -21,20 +21,22 @@ export default function BattlestationTable({ battlestation, user, handleDeleteIt
 
     const StyledTableCell = styled(TableCell)(({ theme }) => ({
         [`&.${tableCellClasses.head}`]: {
-            backgroundColor: 'rgb(27,36,54)',
-            color: 'white',
-            borderBottom: '1px solid red'
+            backgroundColor: 'rgb(1, 6, 10)',
+            color: 'rgb(191,192,219)',
+            // controls the heading border
+            borderBottom: '1px solid red',
+            border: 0,
         },
         [`&.${tableCellClasses.body}`]: {
             borderBottom: '3px solid rgb(56,66,84)',
-            color: 'white',
-            fontSize: 14,
+            color: 'rgba(153,164,185,1)',
+            fontSize: 13.3,
         },
     }));
 
     const StyledTableRow = styled(TableRow)(({ theme }) => ({
         '&:nth-of-type(odd)': {
-            color: 'white',
+
         },
         '&:nth-of-type(even)': {
             color: 'red',
@@ -76,7 +78,7 @@ export default function BattlestationTable({ battlestation, user, handleDeleteIt
     return (
         <TableContainer className='item-table-container' 
             sx={{ 
-                border: '5px solid rgba(41, 49, 58, 0.64)', 
+                border: '1px solid rgba(41, 49, 58)', 
                 borderRadius: 4,
                 minHeight: 500,
 
@@ -91,13 +93,14 @@ export default function BattlestationTable({ battlestation, user, handleDeleteIt
                         <StyledTableCell
                             style={{
                                 width: itemColumnWidth,
-                                fontSize: '1rem',
+                                fontSize: '1.3rem',
+                                fontWeight: 500,
                             }}>
                             Item
                         </StyledTableCell>
                         <StyledTableCell
                             style={{
-                                fontSize: '1rem',
+                                fontSize: '1.3rem',
                             }}
                             align="right">
                             Model&nbsp;</StyledTableCell>
@@ -118,7 +121,6 @@ export default function BattlestationTable({ battlestation, user, handleDeleteIt
                                         {<MdDeleteForever />}&nbsp;
                                     </Button>
                                 )}
-
                             </StyledTableCell>
                         </StyledTableRow>
                     ))}
