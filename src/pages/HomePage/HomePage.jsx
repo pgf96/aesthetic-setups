@@ -4,6 +4,7 @@ import * as battlestationsAPI from '../../utilities/battlestations-api'
 import HomePageBanner from "../../components/HomePageBanner/HomePageBanner"
 import BattlestationList from '../../components/BattlestationList/BattlestationList';
 import HeroBanner from '../../components/HeroBanner/HeroBanner';
+import ExplanationBanner from '../../components/ExplanationBanner/ExplanationBanner';
 import { Container } from 'react-bootstrap';
 
 
@@ -27,6 +28,7 @@ const HomePage = () => {
       {/* test */}
       <HomePageBanner />
       <HeroBanner />
+      <ExplanationBanner />
 
        
       {/* <Container fluid style={{padding: '0 1vw'}}>
