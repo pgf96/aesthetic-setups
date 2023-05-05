@@ -10,14 +10,27 @@ import { Container } from 'react-bootstrap';
 
 const HomePage = () => {
   const [battlestations, setBattlestations] = useState([])
-  
-  useEffect(function() {
+
+  useEffect(function () {
     async function getAllBattlestations() {
       const allBattlestations = await battlestationsAPI.getAll()
+      shuffle(allBattlestations)
       setBattlestations(allBattlestations)
     }
+    // randomize
+    function shuffle(arr) {
+      for (let i = arr.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [arr[i], arr[j]] = [arr[j], arr[i]];
+      }
+    }
+
+
+
     getAllBattlestations()
-  },[])
+  }, [])
+
+
 
 
 
@@ -30,10 +43,10 @@ const HomePage = () => {
       <HeroBanner />
       <ExplanationBanner />
 
-       
-      {/* <Container fluid style={{padding: '0 1vw'}}>
-      <BattlestationList battlestations={battlestations}/>
-      </Container> */}
+
+      <Container fluid style={{ padding: '0 1vw' }}>
+        <BattlestationList battlestations={battlestations} />
+      </Container>
     </div>
   )
 }
