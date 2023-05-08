@@ -137,7 +137,7 @@ export default function ImageTagger({ battlestation, handleLoaded, xScale, yScal
 
             <div className='main-image' style={{ position: 'relative' }}>
                 <svg 
-                    style={{borderRadius: 10}}
+                    style={{borderRadius: 0}}
                     ref={svgRef}
                     width={svgWidth}
                     height={svgHeight}
@@ -188,7 +188,7 @@ export default function ImageTagger({ battlestation, handleLoaded, xScale, yScal
                             />
 
                             <Label
-                                maxWidth={xScale(150)}
+                                minWidth={xScale(100)}
                                 titleFontSize={xScale(12)}
                                 title={annotation.model}
                                 fontColor={'white'}
