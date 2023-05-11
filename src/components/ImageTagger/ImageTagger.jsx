@@ -5,11 +5,8 @@ import { EditableAnnotation, Label, Connector, CircleSubject, LineSubject } from
 
 export default function ImageTagger({ battlestation, handleLoaded, xScale, yScale, width, height, isEditable, unsavedAnnotation, setUnsavedAnnotation, setIsPortrait }) {
 
-
-    // const [isEditable, setIsEditable] = useState(false)
     const [clickCoordinates, setClickCoordinates] = useState([]);
     const [annotationData, setAnnotationData] = useState([])
-    // const [unsavedAnnotation, setUnsavedAnnotation] = useState([])
     const [svgWidth, setSvgWidth] = useState(1)
     const [svgHeight, setSvgHeight] = useState(1)
 
@@ -53,18 +50,6 @@ export default function ImageTagger({ battlestation, handleLoaded, xScale, yScal
             )
         );
     }
-
-    // function handleAnnotationSave(e) {
-    //     e.preventDefault()
-    //     handleUpdateAllItemPositions(unsavedAnnotation)
-    // }
-
-
-
-    // function handleCheck() {
-    //     setIsEditable(!isEditable)
-    //     return isEditable
-    // }
 
     const [originalAspectRatio, setOriginalAspectRatio] = useState(null);
 
@@ -119,22 +104,7 @@ export default function ImageTagger({ battlestation, handleLoaded, xScale, yScal
 
     return (
         <div className="svg-cursor-image-container">
-
             <Cursor svgRef={svgRef} setClickCoordinates={setClickCoordinates} />
-            {/* <div>
-                <span style={{color: 'white'}}> here is the {xScale(1)} </span> 
-                <br /> 
-                <span style={{color: 'white'}}> The mouse is at position{' '}</span> 
-            
-                <b style={{color: 'white'}}>({clickCoordinates.x}, {clickCoordinates.y})</b>
-                <div>
-                    <label> edit </label>
-                    <input type="checkbox" name='edit' onChange={handleCheck} />
-                    <button onClick={handleAnnotationSave}> click </button>
-                </div>
-            </div> */}
-
-
             <div className='main-image' style={{ position: 'relative' }}>
                 <svg 
                     style={{borderRadius: 0}}
@@ -158,8 +128,8 @@ export default function ImageTagger({ battlestation, handleLoaded, xScale, yScal
                             y={yScale(annotation.y)}
                             dx={xScale(annotation.dx)}
                             dy={yScale(annotation.dy)}
-                            width={annotation.width}
-                            height={annotation.height}
+                            width={svgWidth}
+                            height={svgHeight}
                             canEditSubject={isEditable}
                             canEditLabel={isEditable}
                             subjectDragHandleProps={{ style: { stroke: 'rgba(255, 0, 0)' }, r: 15 }}
@@ -188,16 +158,15 @@ export default function ImageTagger({ battlestation, handleLoaded, xScale, yScal
                             />
 
                             <Label
-                                minWidth={xScale(100)}
+                                maxWidth={xScale(100)}
                                 titleFontSize={xScale(12)}
+                                className="change-font"
                                 title={annotation.model}
                                 fontColor={'white'}
                                 showBackground={true}
                                 backgroundFill={'rgba(0, 0, 0, 0.3)'}
                                 anchorLineStroke={'black'}
                                 showAnchorLine={false}
-
-                                backgroundPadding={xScale(12)}
                                 backgroundProps={{ rx: 10, }}
 
                             />
@@ -208,7 +177,6 @@ export default function ImageTagger({ battlestation, handleLoaded, xScale, yScal
                     ))}
                 </svg>
             </div>
-
         </div>
     );
 };
