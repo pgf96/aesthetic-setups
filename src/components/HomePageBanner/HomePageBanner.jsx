@@ -1,5 +1,6 @@
 import './HomePageBanner.css'
 import { useRef, useEffect, useState } from 'react';
+import { Container } from '@mui/material';
 
 export default function HomePageBanner() {
     const [isLoaded, setIsLoaded] = useState(false);
@@ -24,13 +25,16 @@ export default function HomePageBanner() {
                 style={{ opacity: isLoaded ? 1 : 0, 
                 transition: 'opacity 1s ease-in-out' }}/>
             <div className='cover' ></div>
-            <div className='content'
-                style={{ opacity: isLoaded ? 1 : 0, 
-                transition: 'opacity 1s ease-in-out' }}>
-                <h1>Aesthetic Setups </h1>
-                <h2> <span className='first-word accenuate'>Simplify your search </span> to find the right accessories for your <span className='accenuate'> perfect </span> desk setup</h2>
-                <h2>Inspiration drawn from the best of r/Battlestations </h2>
-            </div>
+            <Container>
+                <div className='content'
+                    style={{ opacity: isLoaded ? 1 : 0, 
+                    transition: 'opacity 1s ease-in-out' }}>
+                    <h1>Discover Share Inspire</h1>
+                    <h2> <span className='accenuate'>Simplify your search </span> to find the right accessories for your perfect workspace and <span className='accenuate'>showcase inspirational designs</span>. Inspiration drawn from the best of r/Battlestations.</h2>
+                    <h2>Inspiration drawn  from the best of r/Battlestations</h2>
+                    <h2>Inspiration drawn from the best of r/Battlestations </h2>
+                </div>
+            </Container>
         </div>
 
 

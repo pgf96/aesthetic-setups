@@ -1,5 +1,5 @@
 .banner{
-    width: 100%;
+    /* width: 100%; */
     height: 100vh;
     display: flex;
     flex-direction: column;
@@ -31,8 +31,8 @@ video {
 }
 
 .content {
-    height: 70%;
-    width: 100%;
+    height: 100%;
+    /* width: 100%; */
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -43,26 +43,18 @@ video {
 }
 
 .content>h1 {
-    /* font-size: 12vh; */
-    /* letter-spacing: 22px; */
-    /* font-size: 5.0vw; */
-    font-size: 148px;
-    font-weight: 100;
+    font-size: 6.5rem;
+    font-weight: 300;
     color: rgb(234, 234, 234);
-    text-shadow: 3px 3px 5px #b4b4b4;
-    /* margin: 10px */
+    /* text-shadow: 2px 2px 4px #b4b4b4; */
 }
 
 .content>h2 {
-    font-size: 1.1vw;
-    font-weight: 200;
-    letter-spacing: 3px;
+    font-size: 1.3rem;
+    font-weight: 100;
     color: white;
 }
 
-.first-word{
-    /* text-shadow: 1px 2px 3px #b4b4b4; */
-}
 
 .accenuate
 {
@@ -83,9 +75,9 @@ video {
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   animation: textclip 3s linear infinite;
-  display: inline-block;
-    font-weight: 800;
-      font-size: 1.2vw;
+  /* display: inline-block; */
+    font-weight: 100;
+      font-size: 1.3rem;
 }
 
 @keyframes textclip {
@@ -98,7 +90,7 @@ video {
 
 @media screen and (max-width: 1440px) {
     .content>h1 {
-        font-size: 5rem;
+        font-size: 6rem;
     }
     .content>h2 {
         font-size: 1.3rem;
@@ -112,7 +104,6 @@ video {
 @media screen and (max-width: 1024px) {
     .content>h1 {
         font-size: 4rem;
-        letter-spacing: 10px;
     }
     .content>h2 {
         font-size: .8rem;
@@ -126,7 +117,6 @@ video {
 @media screen and (max-width: 768px) {
     .content>h1 {
         font-size: 4rem;
-        letter-spacing: 8px;
     }
     .content>h2 {
         font-size: .7rem;

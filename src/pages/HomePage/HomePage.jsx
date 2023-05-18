@@ -39,9 +39,10 @@ const HomePage = () => {
     <div className='HomePage'>
       {/* navbar. after they go past a certain vh render it and sticky it to the top */}
       {/* test */}
-      <HomePageBanner />
+      {/* <HomePageBanner /> */}
       <HeroBanner />
       <ExplanationBanner />
+     
 
 
       <Container fluid style={{ padding: '0 1vw' }}>
