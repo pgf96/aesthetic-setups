@@ -6,7 +6,6 @@ import { EditableAnnotation, Label, Connector, CircleSubject, LineSubject } from
 export default function ImageTagger({ battlestation, handleLoaded, xScale, yScale, width, height, isEditable, unsavedAnnotation, setUnsavedAnnotation, setIsPortrait }) {
 
     const [clickCoordinates, setClickCoordinates] = useState([]);
-    const [annotationData, setAnnotationData] = useState([])
     const [svgWidth, setSvgWidth] = useState(1)
     const [svgHeight, setSvgHeight] = useState(1)
 
@@ -22,12 +21,14 @@ export default function ImageTagger({ battlestation, handleLoaded, xScale, yScal
     })
     const svgRef = useRef(null)
 
-    useEffect(function () {
-        function getItems() {
-            setUnsavedAnnotation(battlestation.items)
+    useEffect(() => {
+        async function getItems() {
+          if (battlestation.items) {
+            setUnsavedAnnotation(battlestation.items);
+          }
         }
-        getItems()
-    }, [battlestation])
+        getItems();
+      }, [battlestation]);
 
     function handleSubmit(e) {
         e.preventDefault()

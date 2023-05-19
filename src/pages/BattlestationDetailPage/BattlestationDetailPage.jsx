@@ -26,6 +26,7 @@ export default function BattlestationDetailPage({ user }) {
   const [isEditable, setIsEditable] = useState(false)
   const [isSaved, setIsSaved] = useState(false)
   const [unsavedAnnotation, setUnsavedAnnotation] = useState([])
+  const [annotationData, setAnnotationData] = useState([])
   const [isPortrait, setIsPortrait] = useState('')
 
   const { id } = useParams()
@@ -65,6 +66,7 @@ export default function BattlestationDetailPage({ user }) {
     })
   }
 
+  // change add item to updating item set - unnecessary for single add item
   async function handleAddItem(itemData) {
     const newItemList = await itemsAPI.addItem(itemData, id)
     setBattlestation(prevData => ({
@@ -72,6 +74,11 @@ export default function BattlestationDetailPage({ user }) {
       items: newItemList
     }))
   }
+
+  // async function handleCreateItem(e) {
+  //   e.preventDefault();
+  //   setAnnotationData((prevData) => [...prevData, newItem]);
+  // }
 
   async function handleUpdateAllItemPositions(itemPositions) {
     const updatedItems = await itemsAPI.updateAllItemPositions(id, itemPositions)
