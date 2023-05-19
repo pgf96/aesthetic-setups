@@ -25,7 +25,7 @@ export default function HeroBanner() {
             Concept inspired by subreddit r/battlestations.
           </span>
           </p> */}
-          <p>Streamline your search for workspace accessories with our collection of labeled setups. Join our community of enthusiasts and showcase your inspirational designs.<br />
+          <p>Browse our curated collection and effortlessly find the right accessories for your workspace.<br />
             <span className='inspiration'>
             Concept inspired by subreddit r/battlestations.
           </span>
