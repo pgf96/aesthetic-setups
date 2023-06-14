@@ -150,7 +150,7 @@ export default function BattlestationDetailPage({ user }) {
         {loaded && <>
           <div className='detail-header'>
             <Avatar />
-            <p style={{ margin: 0, paddingLeft: '1rem' }}>Username {battlestation.user}
+            <p> {battlestation.user?.name ? battlestation.user.name : 'Deleted Account'}
               <span className='detail-header-small'><AiOutlineStar /> 5.0 |  {formatDate(battlestation.createdAt)} </span>
             </p>
           </div>

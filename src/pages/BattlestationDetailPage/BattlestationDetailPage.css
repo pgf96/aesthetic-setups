@@ -16,17 +16,19 @@
 
 .detail-header {
     display: flex;
-    align-items: '';
-    padding-bottom: 1rem;
 }
 
 .detail-header p {
     font-size: 1rem;
+    font-weight: 700;
+    padding-left: .75rem;
     grid-area: header;
-    color: white;
+    color: rgb(40, 170, 109);
 }
 
 .detail-header-small {
+    font-weight: 200;
+    color: white;
     display: block;
     font-size: .65rem;
 }
