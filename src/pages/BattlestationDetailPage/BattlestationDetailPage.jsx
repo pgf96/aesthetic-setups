@@ -13,10 +13,11 @@ import Footer from '../../components/Footer/Footer'
 import { useMediaQuery } from 'react-responsive'
 import { useMemo } from 'react'
 import { scaleLinear } from '@visx/scale'
-
 import { Tooltip } from 'react-tooltip'
 import { BiHelpCircle } from 'react-icons/bi'
 import 'react-tooltip/dist/react-tooltip.css'
+import Avatar from '@mui/material/Avatar';
+import { AiOutlineStar } from 'react-icons/ai'
 
 
 export default function BattlestationDetailPage({ user }) {
@@ -32,9 +33,9 @@ export default function BattlestationDetailPage({ user }) {
   const { id } = useParams()
   const navigate = useNavigate()
 
-  const handleLoaded = useCallback(()=> {
+  const handleLoaded = useCallback(() => {
     setLoaded(true)
-  },[])
+  }, [])
 
   useEffect(function () {
     async function getById() {
@@ -126,26 +127,35 @@ export default function BattlestationDetailPage({ user }) {
     [height]
   );
 
+  function formatDate(dateString) {
+    const date = new Date(dateString);
+    let day = date.getDate();
+    let month = date.getMonth() + 1;
+    let year = date.getFullYear();
 
-  
+    return `${month}-${day}-${year}`;
+  }
+
+
+
 
 
   return (
     <div className='BattlestationDetailPage'>
-      {/* <Container className='detail' style={{gridTemplateColumns: isPortrait ? '.6fr .6fr' : '1.4fr .6fr'}}> */}
       <Container className='detail'>
-        <ImageTagger battlestation={battlestation} setIsPortrait={setIsPortrait} handleLoaded={handleLoaded}unsavedAnnotation={unsavedAnnotation} setUnsavedAnnotation={setUnsavedAnnotation} isEditable={isEditable} width={width} height={height} xScale={xScale} yScale={yScale} handleUpdateAllItemPositions={handleUpdateAllItemPositions} />
+
+        <div className='detail-picture'>
+          <ImageTagger battlestation={battlestation} setIsPortrait={setIsPortrait} handleLoaded={handleLoaded} unsavedAnnotation={unsavedAnnotation} setUnsavedAnnotation={setUnsavedAnnotation} isEditable={isEditable} width={width} height={height} xScale={xScale} yScale={yScale} handleUpdateAllItemPositions={handleUpdateAllItemPositions} />
+        </div>
         {loaded && <>
+          <div className='detail-header'>
+            <Avatar />
+            <p style={{ margin: 0, paddingLeft: '1rem' }}>Username {battlestation.user}
+              <span className='detail-header-small'><AiOutlineStar /> 5.0 |  {formatDate(battlestation.createdAt)} </span>
+            </p>
+          </div>
+
           <div className='display-info'>
-            {/* display tooltip if user is logged in */}
-            {/* {user && 
-            <>
-              <span  data-tooltip-id='tooltip' data-tooltip-html={`After adding a label, click the edit button at the bottom of the table. <br /> Drag and drop the handles to reposition the label. <br/> Once you are finished click 'save labels. <br /> ***adding a label before saving the positions will cause <br /> all unsaved labels to be reverted back to their original position***`}>
-                <BiHelpCircle style={{ color: 'white' }} />
-              </span>
-              <Tooltip place='down' id='tooltip' />
-            </>
-            } */}
             <BattlestationTable tableWidth={tableWidth} user={user} battlestation={battlestation} handleDeleteItem={handleDeleteItem} handleAddItem={handleAddItem} />
             <ul className='user-info'>
               <li style={{ float: 'left' }}> User: {battlestation.redditUser}</li>
@@ -154,9 +164,9 @@ export default function BattlestationDetailPage({ user }) {
 
             {battlestation.approved ?
               "" : <li style={{ color: 'red' }}> "not approved"               <span data-tooltip-id='tooltip-pending' data-tooltip-html={'Posts are added to a pending list upon submission. <br/> Users with privileges approve or deny posts via <br/> the "/pending" route. The approved posts are publicly <br/> displayed with others.'}>
-              <BiHelpCircle style={{ color: 'white' }} />
-            </span>
-            <Tooltip  id='tooltip-pending' /></li>}
+                <BiHelpCircle style={{ color: 'white' }} />
+              </span>
+                <Tooltip id='tooltip-pending' /></li>}
             {/* display approval button if not - refactor to check serverside roles instead of client side*/}
             {/* if id is the guest example id */}
             {(user && user.roles.includes('admin')) || battlestation._id === '63f662e91b6e69d4961170b6' ? (
@@ -176,7 +186,7 @@ export default function BattlestationDetailPage({ user }) {
                   )}
                 </div>
                 {user.roles.includes('admin') && (
-                  <button style={{margin: '10px 0 0 100px'}}className='button-control' onClick={handleDelete}> Delete </button>
+                  <button style={{ margin: '10px 0 0 100px' }} className='button-control' onClick={handleDelete}> Delete </button>
                 )}
 
                 {battlestation.approved === !true && user.roles.includes('admin') && (
