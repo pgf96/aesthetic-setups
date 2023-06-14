@@ -21,7 +21,10 @@ async function approvePending(req,res) {
 
 async function show(req,res) {
     // remove user info
-    const battlestation = await Battlestation.findById(req.params.id).select('-items.user')
+    const battlestation = await Battlestation.findById(req.params.id)
+    .populate('user', 'name')
+    .select('-items.user')
+    console.log(battlestation)
     res.json(battlestation)
 }
 
@@ -39,6 +42,11 @@ async function deleteBattlestation(req,res) {
         console.log(error)
 
     }
+}
+
+// helper functions
+async function getUsername() {
+
 }
 
 module.exports = {
